@@ -46,6 +46,13 @@ export default function Page() {
                         console.log("Sign In");
                     }}
                 />
+                <Button
+                    label="Join Meeting"
+                    onClick={() => {
+                        console.log("Sign Up");
+                    }
+                    }
+                />
             </form>
         </div>
     );
