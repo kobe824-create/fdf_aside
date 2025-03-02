@@ -2,7 +2,7 @@
 interface ButtonProps {
     label: string;
     className?: string;
-    onClick: () => void;
+    onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 export default function Button(props: ButtonProps) {

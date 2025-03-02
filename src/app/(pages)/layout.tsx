@@ -1,10 +1,14 @@
+"use client";
 import LogoContainer from "@/components/logoContainer";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function TabsLayout({
     children,
 }: Readonly<{
     children: React.ReactNode;
 }>) {
+    const router = useRouter();
 
     const dashboardSVG = (
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
@@ -54,29 +58,48 @@ export default function TabsLayout({
         {
             name: "Dashboard",
             svg: dashboardSVG,
-            status: "active"
+            status: "active",
+            path: "overview"
+
         },
         {
             name: "My Account",
             svg: myAccountSVG,
-            status: ""
+            status: "",
+            path: "myAccount"
+            
         },
         {
             name: "Members",
             svg: membersSVG,
-            status: ""
+            status: "",
+            path: "members"
         },
         {
             name: "Meetings",
             svg: meetingsSVG,
-            status: ""
+            status: "",
+            path: "meetings"
         },
         {
             name: "Code of Conduct",
             svg: codeOfConductSVG,
-            status: ""
+            status: "",
+            path: "codeOfConduct"
         }
     ]
+    const [navlinkStates, setNavlinkstates] = useState(navlinks);
+
+    const handleNavigation = (path: string) => {
+        router.push(path);
+    }
+    useEffect (() => {
+        navlinkStates.map((navlink) => {
+            if (navlink.status === "active") {
+                handleNavigation(navlink.path);
+            }
+        })
+    }, [navlinkStates])
 
     return (
         <div className="tabs-layout">
@@ -86,9 +109,20 @@ export default function TabsLayout({
                 </div>
                 <div className="navlinks-container">
                     {
-                        navlinks.map((navlink, index) => {
+                        navlinkStates.map((navlink, index) => {
                             return (
-                                <div className={`navlink ${navlink.status}`} key={index}>
+                                <div 
+                                className={`navlink ${navlink.status}`} key={index} 
+                                onClick={() => {
+                                    setNavlinkstates(navlinkStates.map((navlink, i) => {
+                                        if (i === index) {
+                                            return { ...navlink, status: "active" }
+                                        } else {
+                                            return { ...navlink, status: "" }
+                                        }
+                                    }))
+                                }
+                                }>
                                     <div className="navlink-img-cont">
                                         {navlink.svg}
                                     </div>

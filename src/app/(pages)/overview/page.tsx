@@ -3,9 +3,12 @@ import Button from "@/components/button";
 import FinancialCard from "@/components/financialCard";
 import Table from "@/components/table";
 
+
 export default function Page() {
+
     return (
         <div className="overview-page-wrapper">
+           
             <div className="overview-page-heading">
                 <h1>Overview Dashboard</h1>
                 <p>Dashboard</p>
@@ -316,9 +319,24 @@ export default function Page() {
                             ["John Darcey", "johnd@gmail.com", "Admin", "Active"],
                             ["John Darcey", "johnd@gmail.com", "Admin", "Active"],
                             ["John Darcey", "johnd@gmail.com", "Admin", "Active"],
-                        ]
+                        ],
+                        type: "normal"
                     }}              
                 />
+                  <Table
+                    data={{
+                        tableHeaders: ["Name", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                        tableData: [
+                            ["John Doe", "red", "green", "red", "red", "red", "green", "red", "red", "green", "green", "red", "red"],
+                            ["John Doe", "red", "green", "red", "red", "red", "red", "red", "red", "green", "red", "red", "green"],
+                            ["John Doe", "red", "green", "red", "red", "red", "green", "red", "red", "green", "green", "red", "red"],
+                            ["John Doe", "red", "green", "red", "red", "red", "green", "red", "green", "red", "red", "red", "green"],
+                            ["John Doe", "red", "green", "red", "green", "red", "red", "red", "green", "green", "green", "red", "red"],
+                        ],
+                        type: "colored"
+                    }}              
+                />
+                
             </div>
         </div>
     )

@@ -3,11 +3,26 @@ import Button from "@/components/button";
 import Checkbox from "@/components/checkbox";
 import FormField from "@/components/formField";
 import LogoContainer from "@/components/logoContainer";
+import MarkAttendancePopup from "@/components/markAttendancePopup";
 import OtpField from "@/components/otpField";
+import { useState } from "react";
 
 export default function Page() {
+    const [popupDisplay, setPopupDisplay] = useState(false);
+    const handleJoinMeeting =  (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault()
+        setPopupDisplay(true)
+    }
     return (
         <div className="login-page-wrapper">
+            <div className="popup-background"
+                style={{ display: popupDisplay ? "flex" : "none" }}
+                onClick={() => setPopupDisplay(false)}
+                >
+                < MarkAttendancePopup
+                    closePopup={() => setPopupDisplay(false)}
+                />
+            </div>
             <form className="login-form">
                 <LogoContainer />
                 <div className="login-page-heading">
@@ -22,7 +37,7 @@ export default function Page() {
                         value=""
                         onChange={() => {
                             console.log("Phone Number");
-                         }}
+                        }}
                     />
                     <OtpField
                         label="OTP Number"
@@ -31,7 +46,7 @@ export default function Page() {
                             console.log("OTP Number");
                         }}
                     />
-                    <Checkbox 
+                    <Checkbox
                         label="Remember me"
                         checked={false}
                         onChange={() => {
@@ -40,18 +55,17 @@ export default function Page() {
                     />
 
                 </fieldset>
-                <Button 
+                <Button
                     label="Sign In"
                     onClick={() => {
                         console.log("Sign In");
                     }}
+                    className="button-primary"
                 />
                 <Button
                     label="Join Meeting"
-                    onClick={() => {
-                        console.log("Sign Up");
-                    }
-                    }
+                    onClick={handleJoinMeeting}
+                    className="button-primary"
                 />
             </form>
         </div>
