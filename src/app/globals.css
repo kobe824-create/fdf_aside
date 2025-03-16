@@ -1,3 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
 * {
   margin: 0;
   padding: 0;
@@ -13,6 +18,42 @@ body {
 :root {
   --primary-btn-color: #ff9501;
   --primary-icon-color: #2395f2;
+}
+
+/* Remove number input arrows in all browsers */
+input[type="number"] {
+  -moz-appearance: textfield; /* Firefox */
+  -webkit-appearance: none; /* Safari, Chrome, Edge */
+  appearance: none; /* Standard */
+  background: transparent; /* Makes background transparent */
+  border: none; /* Optional: Removes border */
+  outline: none; /* Optional: Removes focus outline */
+  color: inherit; /* Inherits text color */
+}
+
+/* Specifically remove the up/down arrows (spinners) in Webkit-based browsers (Chrome, Safari, Edge) */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Transparent background and removing arrows in select inputs */
+select {
+  background-color: transparent !important; /* Ensures transparent background */
+  border: none; /* Optional: Removes border */
+  color: inherit; /* Inherits text color */
+  padding: 5px; /* Optional: Adjust padding for better look */
+}
+
+/* Removes the dropdown arrow in IE/Edge */
+select::-ms-expand {
+  display: none;
+}
+
+/* Further customization for select focus state */
+select:focus {
+  outline: none;
 }
 
 /* Universal settings*/
@@ -67,7 +108,18 @@ body {
 .add-member-body,
 .meeting-body h2,
 .mark-attendance-poppup,
-.member-edit-popup {
+.member-edit-popup,
+.cont-paid,
+.cont-unpaid,
+.cont-absent,
+.cont-present,
+.cont-late,
+.create-meeting-page,
+.meeting-side-bar-top h3,
+.added-attachments,
+.atttendance-status-container,
+.attendance-status,
+.attendance-chekbox  {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -121,7 +173,13 @@ body {
 .photo-size-spec,
 .add-member-inputs,
 .mark-attendance-success,
-.login-page-heading {
+.login-page-heading,
+.financial-card,
+.create-meeting-form,
+.create-meeting-page-section,
+.add-attachment-input-cont,
+.otp-login-wrapper
+ {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -135,6 +193,14 @@ fieldset {
 }
 input {
   outline: none;
+}
+
+/* otpLogin */
+
+.otp-login-wrapper {
+  gap: 16px;
+  width: 100%;
+  align-items: center;
 }
 
 /* Login */
@@ -191,6 +257,15 @@ input {
   border-radius: 10px;
   padding: 12px;
 }
+.form-field textarea {
+  width: 100%;
+  height: 100px;
+  background-color: transparent;
+  border: 1px solid #d0d0d0;
+  border-radius: 10px;
+  padding: 12px;
+  outline: none;
+}
 
 /*checkbox*/
 .checkbox {
@@ -232,10 +307,15 @@ input {
   background: linear-gradient(135deg, #14add6 0%, #384295 100%);
 }
 
-.button.button-primary:hover {
+.button.button-tertially:hover, .button.button-tertially.disabled {
+  background: linear-gradient(135deg, #14add6 0%, #384295 100%);
+  opacity: 0.8;
+}
+
+.button.button-primary:hover, .button.button-primary.disabled {
   background-color: #ff9501a7;
 }
-.button.button-secondary:hover {
+.button.button-secondary:hover, .button.button-secondary.disabled {
   background-color: #2395f2a7;
 }
 
@@ -261,7 +341,6 @@ input {
   padding: 12px;
   text-align: center;
 }
-
 .financial-card {
   gap: 16px;
   width: 100%;
@@ -271,6 +350,10 @@ input {
   padding: 24px;
   border-radius: 12px;
   justify-content: space-between;
+  cursor: pointer;
+}
+.financial-card:hover {
+  background-color: rgba(91, 195, 255, 0.467);
 }
 .financial-card p {
   font-family: "Outfit", sans-serif;
@@ -290,6 +373,9 @@ input {
   border: 1px solid #00000033;
   border-radius: 20px;
 }
+.table button {
+  height: 40px;
+}
 .table table {
   width: 100%;
   border-collapse: collapse;
@@ -304,16 +390,17 @@ input {
 .table td {
   font-family: "Zain", sans-serif;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 20px;
 }
 .table tr {
   border-bottom: 1px solid #e9eaea;
-  height: 78px;
+  /* height: 78px; */
 }
+
 .table th,
 .table td {
-  padding: 18px 22px;
+  padding: 16px;
 }
 .search-input {
   border: 1px solid #e9eaea;
@@ -327,7 +414,6 @@ input {
   border: none;
   outline: none;
   width: 100%;
-
   font-family: "Zain", sans-serif;
   font-weight: 400;
   font-size: 15px;
@@ -360,7 +446,7 @@ input {
 .table-bottom {
   gap: 16px;
   width: 100%;
-  height: 72px;
+  /* height: 72px; */
   padding: 20px 24px;
   justify-content: space-between;
 }
@@ -391,7 +477,7 @@ input {
 /*filterpopup*/
 .filter-pop-up-container {
   width: 317px;
-  height: 478px;
+  /* height: 478px; */
   background-color: white;
   border-radius: 12px;
   padding: 24px 21px;
@@ -405,6 +491,13 @@ input {
   line-height: 24px;
   letter-spacing: -1%;
   color: #1c1d22;
+}
+.filter-pop-up-container p {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #ff3d08;
 }
 .filter-pop-up-fieldset {
   gap: 12px;
@@ -482,7 +575,42 @@ input {
   border-radius: 20px;
 }
 
+/*table-popup*/
+.table-popup {
+  padding: 16px;
+  background-color: white;
+  border-radius: 12px;
+}
 
+/* create-meeting-form */
+
+.create-meeting-page {
+  width: 100%;
+}
+.create-meeting-page h1 {
+  font-family: "Zain", sans-serif;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 40px;
+}
+.create-meeting-form {
+  gap: 16px;
+  width: 600px;
+  max-width: 100%;
+  border: 1px solid #e9eaea;
+  border-radius: 20px;
+  padding: 24px;
+}
+.create-meeting-page-section {
+  gap: 16px;
+  width: 100%;
+}
+.create-meeting-page-section h2 {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 48.76px;
+}
 
 /* components end */
 
@@ -672,6 +800,8 @@ input {
   gap: 16px;
   padding: 16px;
   align-items: flex-start;
+  border: 1px solid #00000033;
+  border-radius: 20px;
 }
 .financial-cards-wrapper {
   gap: 16px;
@@ -799,6 +929,8 @@ input {
 .allmembers {
   gap: 16px;
   width: 100%;
+  height: 570px;
+  overflow: scroll;
 }
 .member-prof {
   gap: 8px;
@@ -1050,6 +1182,13 @@ input {
   font-weight: 600;
   font-size: 18px;
   line-height: 28px;
+  gap: 16px;
+  justify-content: space-between;
+  width: 100%;
+}
+.meeting-side-bar-top h3 button {
+  height: 40px;
+  padding: 8px 10px;
 }
 .meeting-infos {
   gap: 8px;
@@ -1096,7 +1235,8 @@ input {
   line-height: 18px;
   color: #727a90;
 }
-.attachment-infos .download-attachment-icon {
+
+.download-attachment-icon {
   cursor: pointer;
   margin-left: auto;
 }
@@ -1158,6 +1298,13 @@ input {
 .activity-content {
   gap: 8px;
   width: 100%;
+}
+.activity-content .activity-time {
+  font-family: "Zain", sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 20px;
+  color: #727a90;
 }
 .activity-content h4 {
   font-family: "Zain", sans-serif;
@@ -1345,6 +1492,7 @@ input {
 }
 .members-table tr td:nth-last-child(1) {
   color: #384295;
+  cursor: pointer;
 }
 .members-table td,
 .members-table th {
@@ -1370,6 +1518,10 @@ input {
   border-radius: 20px;
   align-items: center;
 }
+.add-member-left-side button {
+  height: 30px;
+  width: 180px;
+}
 .add-member-profile-img-cont {
   width: 150px;
   height: 150px;
@@ -1377,7 +1529,13 @@ input {
   overflow: hidden;
   background-color: #f2f2f2;
   align-items: center;
-  gap: 8px;
+  position: relative;
+}
+.add-member-profile-img-cont img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 .add-member-profile-img-cont p {
   font-family: "Nunito", sans-serif;
@@ -1389,6 +1547,7 @@ input {
   padding: 10px;
   border: 1px dashed #e8e8e8;
   border-radius: 50%;
+  cursor: pointer;
 }
 .photo-size-spec {
   width: 100%;
@@ -1419,4 +1578,168 @@ input {
 }
 .add-member-inputs .tertially-btn {
   width: 100%;
+}
+
+.cont-paid, .cont-present {
+  background-color: #e6f4f5;
+  border: 1px solid #b0dedf;
+  color: #009499;
+}
+.cont-unpaid, .cont-absent{
+  border: 1px solid #facdc3;
+  background-color: #feefec;
+  color: #f05d3d;
+}
+.cont-late {
+  border: 1px solid #f7e2c2;
+  background-color: #fef4e8;
+  color: #f0a500;
+}
+
+.cont-paid,
+.cont-unpaid,
+.cont-present,
+.cont-late,
+.cont-absent {
+  padding: 2px 8px;
+  font-family: "Public Sans", sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 18px;
+  border-radius: 100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.added-attachments {
+  gap: 8px;
+  width: 100%;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+.attachment-preview {
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+  background-color: #f1e7f8;
+  overflow: hidden;
+}
+.attachment-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.added-attachments span {
+  font-family: "Nunito", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+}
+.add-attachment-input-cont p {
+  font-family: "Nunito", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+  color: #384295;
+}
+.add-attachment-input-cont {
+  gap: 8px;
+  width: 100%;
+  align-items: center;
+}
+.atttendance-status-container {
+  gap: 12px;
+  width: 100%;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+.attendance-status {
+  gap: 8px;
+  justify-content: flex-start;
+}
+.attendance-status p {
+  font-family: "Nunito", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+}
+.attendance-chekbox {
+  width: 20px;
+  height: 20px;
+  border: 1px solid #d0d0d0;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.attendance-chekbox svg {
+  display: none;
+}
+.attendance-chekbox.checked {
+  background-color: #FF9501;
+}
+.attendance-chekbox.checked svg {
+  display: block;
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.5rem;
+  }
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
 }

@@ -1,8 +1,25 @@
 "use client";
 import Button from "@/components/button";
 import Table from "@/components/table";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function Meetings() {
+    const router = useRouter();
+    const [meetings, setMeetings] = useState([]);
+
+    useEffect(() => {
+        axios.get("/api/meetings/get")
+            .then(res => {
+                setMeetings(res.data.meetings);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }, []);
+
+
     return (
         <div className="meeting-page">
 
@@ -11,25 +28,30 @@ export default function Meetings() {
                     Meetings Dashboard
                     <Button
                         label="Create New Metting"
-                        onClick={() => {
-                            console.log("Sign In");
-                        }}
+                        onClick={
+                            () => {
+                                router.push("/createMeeting")
+                            }
+                        }
                         className="button-primary"
                     />
                 </h2>
                 <div className="overview-tables">
                     <Table
                         data={{
-                            tableHeaders: ["Name", "Status", "CheckIn time"],
-                            tableData: [
-                                ["John Darcey", "Absent", "07:30 PM"],
-                                ["John Darcey", "Present", "06:00 PM"],
-                                ["John Darcey", "Absent", "07:30 PM"],
-                                ["John Darcey", "Present", "06:00 PM"],
-                                ["John Darcey", "Absent", "07:30 PM"],
-                                ["John Darcey", "Present", "06:00 PM"],
-                                ["John Darcey", "Absent", "07:30 PM"]
-                            ],
+                            tableHeaders: ["Title", "Start Time", "End Time", "Location", "Action"],
+                            tableData: meetings.map((meeting: any) => [
+                                meeting.title,
+                                meeting.startTime,
+                                meeting.endTime,
+                                meeting.location,
+                                <Button
+                                    key={meeting._id}
+                                    label="View"
+                                    onClick={() => router.push(`/meeting/?id=${meeting._id}`)}
+                                    className="button-tertially"
+                                />
+                            ]),
                             type: "normal"
                         }}
                     />

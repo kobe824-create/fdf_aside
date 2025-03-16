@@ -3,10 +3,11 @@ import Button from "./button";
 
 interface MemberEditPopupProps {
     closePopup: () => void;
+    data: string;
 }
 
 export default function MemberEditPopup(props: MemberEditPopupProps) {
-    const { closePopup } = props;
+    const { closePopup, data } = props;
     return (
 
     <div className="member-edit-popup">
@@ -36,7 +37,7 @@ export default function MemberEditPopup(props: MemberEditPopupProps) {
             </svg>
             <div className="login-page-heading">
                 <h2>Congratulations</h2>
-                <p>You have successfully added a new member</p>
+                <p>{data}</p>
             </div>
             <Button
                 label="Continue"

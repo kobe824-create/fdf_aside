@@ -1,14 +1,26 @@
 "use client";
 import LogoContainer from "@/components/logoContainer";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@/components/authProvider";
+import { signOut } from "@firebase/auth";
+import { auth } from "@/firebase";
+import { UserTypes } from "@/utils/types";
+import axios from "axios";
 
 export default function TabsLayout({
     children,
 }: Readonly<{
     children: React.ReactNode;
 }>) {
+
+    const [member, setMember] = useState<UserTypes | null>(null);
+
     const router = useRouter();
+
+    const { user, loading } = useAuth();
+
+
 
     const dashboardSVG = (
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
@@ -67,7 +79,7 @@ export default function TabsLayout({
             svg: myAccountSVG,
             status: "",
             path: "myAccount"
-            
+
         },
         {
             name: "Members",
@@ -93,13 +105,41 @@ export default function TabsLayout({
     const handleNavigation = (path: string) => {
         router.push(path);
     }
-    useEffect (() => {
+    useEffect(() => {
         navlinkStates.map((navlink) => {
             if (navlink.status === "active") {
                 handleNavigation(navlink.path);
             }
         })
     }, [navlinkStates])
+
+
+    useEffect(() => {
+        if (user?.phoneNumber) {
+            axios.post("/api/users/getUserByPhone", { phoneNumber: user.phoneNumber })
+                .then((res) => {
+                    setMember(res.data.user);
+                })
+                .catch((err) => {
+                    console.error(err);
+                });
+        }
+    }, [user]);
+
+
+    useEffect(() => {
+        if (!user && !loading) {
+            router.push("/login");
+        }
+    }, [user, loading, router])  
+
+    if (loading) {
+        return (
+            <>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><circle fill="#FF156D" stroke="#FF156D" strokeWidth="15" r="15" cx="40" cy="65"><animate attributeName="cy" calcMode="spline" dur="2" values="65;135;65;" keySplines=".5 0 .5 1;.5 0 .5 1" repeatCount="indefinite" begin="-.4"></animate></circle><circle fill="#FF156D" stroke="#FF156D" strokeWidth="15" r="15" cx="100" cy="65"><animate attributeName="cy" calcMode="spline" dur="2" values="65;135;65;" keySplines=".5 0 .5 1;.5 0 .5 1" repeatCount="indefinite" begin="-.2"></animate></circle><circle fill="#FF156D" stroke="#FF156D" strokeWidth="15" r="15" cx="160" cy="65"><animate attributeName="cy" calcMode="spline" dur="2" values="65;135;65;" keySplines=".5 0 .5 1;.5 0 .5 1" repeatCount="indefinite" begin="0"></animate></circle></svg>
+            </>
+        )
+    }
 
     return (
         <div className="tabs-layout">
@@ -111,18 +151,18 @@ export default function TabsLayout({
                     {
                         navlinkStates.map((navlink, index) => {
                             return (
-                                <div 
-                                className={`navlink ${navlink.status}`} key={index} 
-                                onClick={() => {
-                                    setNavlinkstates(navlinkStates.map((navlink, i) => {
-                                        if (i === index) {
-                                            return { ...navlink, status: "active" }
-                                        } else {
-                                            return { ...navlink, status: "" }
-                                        }
-                                    }))
-                                }
-                                }>
+                                <div
+                                    className={`navlink ${navlink.status}`} key={index}
+                                    onClick={() => {
+                                        setNavlinkstates(navlinkStates.map((navlink, i) => {
+                                            if (i === index) {
+                                                return { ...navlink, status: "active" }
+                                            } else {
+                                                return { ...navlink, status: "" }
+                                            }
+                                        }))
+                                    }
+                                    }>
                                     <div className="navlink-img-cont">
                                         {navlink.svg}
                                     </div>
@@ -143,7 +183,14 @@ export default function TabsLayout({
                         </svg>
                         <p>Help</p>
                     </div>
-                    <div className="side-bar-bottom-container">
+                    <div className="side-bar-bottom-container"
+                        onClick={() => {
+                            if (user) {
+                                signOut(auth);
+                                router.push("/login");
+                            }
+                        }}
+                    >
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                             <path d="M10.5 12.6875C10.4387 14.2308 9.15258 15.5412 7.4297 15.499C7.02887 15.4892 6.53344 15.3495 5.5426 15.07C3.15801 14.3974 1.08796 13.267 0.591296 10.7346C0.5 10.2691 0.5 9.74532 0.5 8.69771L0.5 7.30229C0.5 6.25468 0.5 5.73087 0.591296 5.26538C1.08796 2.73304 3.15801 1.60263 5.5426 0.930022C6.53345 0.650537 7.02887 0.510795 7.4297 0.500989C9.15257 0.458841 10.4387 1.76923 10.5 3.31251" stroke="black" strokeOpacity="0.8" strokeLinecap="round" />
                             <path d="M15.5002 8.00008H6.3335M15.5002 8.00008C15.5002 7.41656 13.8382 6.32636 13.4168 5.91675M15.5002 8.00008C15.5002 8.5836 13.8382 9.67381 13.4168 10.0834" stroke="black" strokeOpacity="0.8" strokeLinecap="round" strokeLinejoin="round" />
@@ -154,7 +201,7 @@ export default function TabsLayout({
             </div>
             <div className="main-container">
                 <div className="main-container-heading">
-                    <p className="wlcm-msg">Welcome back, <span>Benjamin Joel! ☀️</span></p>
+                    <p className="wlcm-msg">Welcome back, <span>{member?.lastname}! ☀️</span></p>
                     <div className="personalised">
                         <div className="notification-bell-container">
                             <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
@@ -166,13 +213,13 @@ export default function TabsLayout({
                             </svg> */}
                         </div>
                         <div className="profile-img-container">
-                            <img src="https://s3-alpha-sig.figma.com/img/73a4/1527/c03aa81f94402eb9a43d0e000e9b5fc2?Expires=1741564800&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=J~hn~uz5P-hn8KqusrRKRSYNvXEKqUAQmV1QfLRiE~sAKfDnjquNGqWtsWGEoom6BvNC-K9bvv7G6ZzHgIkd3A7cSi6~5UC4JbyiiVr30O5epeY8-0ePNa9ZEXdo4jSoyFv2CMG8GmWbDdYmYYTIGnoGUncVubxDm9LKpnLFH5TEi1XfsX2k~32gSm7fKjA79AdLrIgEQYycSMh3qZnqAV9wOJS-7B3srdb1eiJQuXcC5Hh0n7BvEI9mhQ74Mce-AP1mEXCsc7Zk8oK1568BrWvFsGV3pUsk0MPpGHpuIowkPe~KQaFZY1-ruO6XCy8y3jiamc1tRF9nF9OKSpt74A__" alt="profile" />
+                            <img src={member?.image_url} alt="profile" />
                         </div>
                         <div className="member-name-role">
-                            <h3>Benjamin Joel
+                            <h3>{member?.firstname} {" "} {member?.lastname}
                                 <i className="fa-solid fa-angle-down"></i>
                             </h3>
-                            <p>Admin</p>
+                            <p>{member?.role}</p>
                         </div>
                     </div>
                 </div>

@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import FilterPopup from "./filterPopup";
 
 
 interface TableProps {
     data: {
         tableHeaders: string[];
-        tableData: string[][];
+        tableData: (string | ReactNode)[][];
         type?: string;
     };
 }
@@ -87,7 +87,11 @@ export default function Table(props: TableProps) {
                                 <tr key={index}>
                                     {
                                         row.map((cell, idex) => { 
-                                            return data.type === 'normal'  ? (
+                                            return data.type === 'normal'  ? ["present", "absent", "absent excused", "late", "very late", "excused" ].includes(cell) ? (<td key={idex}>
+                                                <p className={`cont-${cell}`}>
+                                                    {cell}
+                                                </p>
+                                            </td>) : (
                                             <td key={idex}>{cell}</td> ) : 
                                             idex === 0 ? (<td key={idex}>{cell}</td> ) :
                                             (<td key={idex}
@@ -97,6 +101,10 @@ export default function Table(props: TableProps) {
                                                 }}
                                             ></td> )
                                         })
+
+                                   
+
+                                        
                                     }
                                 </tr>
                             )

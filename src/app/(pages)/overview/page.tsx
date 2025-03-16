@@ -2,13 +2,36 @@
 import Button from "@/components/button";
 import FinancialCard from "@/components/financialCard";
 import Table from "@/components/table";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { UserTypes } from "@/utils/types";
+import { useAuth } from "@/components/authProvider";
 
 
 export default function Page() {
 
+    const {user} = useAuth();
+
+
+    const [users, setUsers] = useState<UserTypes[]>([]);
+
+    useEffect(() => {
+        axios.get("/api/users/get")
+            .then(res => {
+                setUsers(res.data.users);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }, [])
+
+    useEffect(() => {
+        if(user) console.log(user, "user");
+    }, [user])
+
     return (
         <div className="overview-page-wrapper">
-           
+
             <div className="overview-page-heading">
                 <h1>Overview Dashboard</h1>
                 <p>Dashboard</p>
@@ -220,92 +243,23 @@ export default function Page() {
                     </div>
                 </div>
                 <div className="overview-page-body-right-side">
-                    <h3>35 Members</h3>
+                    <h3>{users.length} Member{users.length > 1 ? "s" : ""}</h3>
                     <div className="allmembers">
-                        <div className="member-prof">
-                            <div className="member-img-cont">
-                                <img src="https://s3-alpha-sig.figma.com/img/2c36/bc97/e1525a4fed3462b2cbb0eada643893da?Expires=1741564800&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=XytbMq-zDrC6SR0NvnLlQRsQ-pS9XPAwY01Nr0GWLdW39dWcBfc0Y3ogQv5yVN1CUkuqNN6~bgO7D6XVGJBY4fH4X3GqGxQVIrdQOI3ZgERVRH0o0UWFOcyfr4QiExN7or5NoF1-Hwux5XbjwME5K2xtyMOclL4kKM9DZxkl4jITmrAinRJVWx625MXOAripzx85oALCUjWGZ3lk47sMSDZBV6Kf492cVhS6as46vDG0XZDSPmTmeRdsy~LDUDSrdIr3hsqzPQCsOqYKJdK1x38ATM35c2GwgKkFjbrcdJFbDu009BpRD1U4NXeFkSKN-~99nNSr5xGT8j-rwjT0lg__" alt="member" />
-                            </div>
-                            <p>John Darcey</p>
-                        </div>
-                        <div className="member-prof">
-                            <div className="member-img-cont">
-                                <img src="https://s3-alpha-sig.figma.com/img/2c36/bc97/e1525a4fed3462b2cbb0eada643893da?Expires=1741564800&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=XytbMq-zDrC6SR0NvnLlQRsQ-pS9XPAwY01Nr0GWLdW39dWcBfc0Y3ogQv5yVN1CUkuqNN6~bgO7D6XVGJBY4fH4X3GqGxQVIrdQOI3ZgERVRH0o0UWFOcyfr4QiExN7or5NoF1-Hwux5XbjwME5K2xtyMOclL4kKM9DZxkl4jITmrAinRJVWx625MXOAripzx85oALCUjWGZ3lk47sMSDZBV6Kf492cVhS6as46vDG0XZDSPmTmeRdsy~LDUDSrdIr3hsqzPQCsOqYKJdK1x38ATM35c2GwgKkFjbrcdJFbDu009BpRD1U4NXeFkSKN-~99nNSr5xGT8j-rwjT0lg__" alt="member" />
-                            </div>
-                            <p>John Darcey</p>
-                        </div>
-                        <div className="member-prof">
-                            <div className="member-img-cont">
-                                <img src="https://s3-alpha-sig.figma.com/img/2c36/bc97/e1525a4fed3462b2cbb0eada643893da?Expires=1741564800&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=XytbMq-zDrC6SR0NvnLlQRsQ-pS9XPAwY01Nr0GWLdW39dWcBfc0Y3ogQv5yVN1CUkuqNN6~bgO7D6XVGJBY4fH4X3GqGxQVIrdQOI3ZgERVRH0o0UWFOcyfr4QiExN7or5NoF1-Hwux5XbjwME5K2xtyMOclL4kKM9DZxkl4jITmrAinRJVWx625MXOAripzx85oALCUjWGZ3lk47sMSDZBV6Kf492cVhS6as46vDG0XZDSPmTmeRdsy~LDUDSrdIr3hsqzPQCsOqYKJdK1x38ATM35c2GwgKkFjbrcdJFbDu009BpRD1U4NXeFkSKN-~99nNSr5xGT8j-rwjT0lg__" alt="member" />
-                            </div>
-                            <p>John Darcey</p>
-                        </div>
-                        <div className="member-prof">
-                            <div className="member-img-cont">
-                                <img src="https://s3-alpha-sig.figma.com/img/2c36/bc97/e1525a4fed3462b2cbb0eada643893da?Expires=1741564800&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=XytbMq-zDrC6SR0NvnLlQRsQ-pS9XPAwY01Nr0GWLdW39dWcBfc0Y3ogQv5yVN1CUkuqNN6~bgO7D6XVGJBY4fH4X3GqGxQVIrdQOI3ZgERVRH0o0UWFOcyfr4QiExN7or5NoF1-Hwux5XbjwME5K2xtyMOclL4kKM9DZxkl4jITmrAinRJVWx625MXOAripzx85oALCUjWGZ3lk47sMSDZBV6Kf492cVhS6as46vDG0XZDSPmTmeRdsy~LDUDSrdIr3hsqzPQCsOqYKJdK1x38ATM35c2GwgKkFjbrcdJFbDu009BpRD1U4NXeFkSKN-~99nNSr5xGT8j-rwjT0lg__" alt="member" />
-                            </div>
-                            <p>John Darcey</p>
-                        </div>
-                        <div className="member-prof">
-                            <div className="member-img-cont">
-                                <img src="https://s3-alpha-sig.figma.com/img/2c36/bc97/e1525a4fed3462b2cbb0eada643893da?Expires=1741564800&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=XytbMq-zDrC6SR0NvnLlQRsQ-pS9XPAwY01Nr0GWLdW39dWcBfc0Y3ogQv5yVN1CUkuqNN6~bgO7D6XVGJBY4fH4X3GqGxQVIrdQOI3ZgERVRH0o0UWFOcyfr4QiExN7or5NoF1-Hwux5XbjwME5K2xtyMOclL4kKM9DZxkl4jITmrAinRJVWx625MXOAripzx85oALCUjWGZ3lk47sMSDZBV6Kf492cVhS6as46vDG0XZDSPmTmeRdsy~LDUDSrdIr3hsqzPQCsOqYKJdK1x38ATM35c2GwgKkFjbrcdJFbDu009BpRD1U4NXeFkSKN-~99nNSr5xGT8j-rwjT0lg__" alt="member" />
-                            </div>
-                            <p>John Darcey</p>
-                        </div>
-                        <div className="member-prof">
-                            <div className="member-img-cont">
-                                <img src="https://s3-alpha-sig.figma.com/img/2c36/bc97/e1525a4fed3462b2cbb0eada643893da?Expires=1741564800&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=XytbMq-zDrC6SR0NvnLlQRsQ-pS9XPAwY01Nr0GWLdW39dWcBfc0Y3ogQv5yVN1CUkuqNN6~bgO7D6XVGJBY4fH4X3GqGxQVIrdQOI3ZgERVRH0o0UWFOcyfr4QiExN7or5NoF1-Hwux5XbjwME5K2xtyMOclL4kKM9DZxkl4jITmrAinRJVWx625MXOAripzx85oALCUjWGZ3lk47sMSDZBV6Kf492cVhS6as46vDG0XZDSPmTmeRdsy~LDUDSrdIr3hsqzPQCsOqYKJdK1x38ATM35c2GwgKkFjbrcdJFbDu009BpRD1U4NXeFkSKN-~99nNSr5xGT8j-rwjT0lg__" alt="member" />
-                            </div>
-                            <p>John Darcey</p>
-                        </div>
-                        <div className="member-prof">
-                            <div className="member-img-cont">
-                                <img src="https://s3-alpha-sig.figma.com/img/2c36/bc97/e1525a4fed3462b2cbb0eada643893da?Expires=1741564800&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=XytbMq-zDrC6SR0NvnLlQRsQ-pS9XPAwY01Nr0GWLdW39dWcBfc0Y3ogQv5yVN1CUkuqNN6~bgO7D6XVGJBY4fH4X3GqGxQVIrdQOI3ZgERVRH0o0UWFOcyfr4QiExN7or5NoF1-Hwux5XbjwME5K2xtyMOclL4kKM9DZxkl4jITmrAinRJVWx625MXOAripzx85oALCUjWGZ3lk47sMSDZBV6Kf492cVhS6as46vDG0XZDSPmTmeRdsy~LDUDSrdIr3hsqzPQCsOqYKJdK1x38ATM35c2GwgKkFjbrcdJFbDu009BpRD1U4NXeFkSKN-~99nNSr5xGT8j-rwjT0lg__" alt="member" />
-                            </div>
-                            <p>John Darcey</p>
-                        </div>
-                        <div className="member-prof">
-                            <div className="member-img-cont">
-                                <img src="https://s3-alpha-sig.figma.com/img/2c36/bc97/e1525a4fed3462b2cbb0eada643893da?Expires=1741564800&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=XytbMq-zDrC6SR0NvnLlQRsQ-pS9XPAwY01Nr0GWLdW39dWcBfc0Y3ogQv5yVN1CUkuqNN6~bgO7D6XVGJBY4fH4X3GqGxQVIrdQOI3ZgERVRH0o0UWFOcyfr4QiExN7or5NoF1-Hwux5XbjwME5K2xtyMOclL4kKM9DZxkl4jITmrAinRJVWx625MXOAripzx85oALCUjWGZ3lk47sMSDZBV6Kf492cVhS6as46vDG0XZDSPmTmeRdsy~LDUDSrdIr3hsqzPQCsOqYKJdK1x38ATM35c2GwgKkFjbrcdJFbDu009BpRD1U4NXeFkSKN-~99nNSr5xGT8j-rwjT0lg__" alt="member" />
-                            </div>
-                            <p>John Darcey</p>
-                        </div>
-                        <div className="member-prof">
-                            <div className="member-img-cont">
-                                <img src="https://s3-alpha-sig.figma.com/img/2c36/bc97/e1525a4fed3462b2cbb0eada643893da?Expires=1741564800&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=XytbMq-zDrC6SR0NvnLlQRsQ-pS9XPAwY01Nr0GWLdW39dWcBfc0Y3ogQv5yVN1CUkuqNN6~bgO7D6XVGJBY4fH4X3GqGxQVIrdQOI3ZgERVRH0o0UWFOcyfr4QiExN7or5NoF1-Hwux5XbjwME5K2xtyMOclL4kKM9DZxkl4jITmrAinRJVWx625MXOAripzx85oALCUjWGZ3lk47sMSDZBV6Kf492cVhS6as46vDG0XZDSPmTmeRdsy~LDUDSrdIr3hsqzPQCsOqYKJdK1x38ATM35c2GwgKkFjbrcdJFbDu009BpRD1U4NXeFkSKN-~99nNSr5xGT8j-rwjT0lg__" alt="member" />
-                            </div>
-                            <p>John Darcey</p>
-                        </div>
-                        <div className="member-prof">
-                            <div className="member-img-cont">
-                                <img src="https://s3-alpha-sig.figma.com/img/2c36/bc97/e1525a4fed3462b2cbb0eada643893da?Expires=1741564800&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=XytbMq-zDrC6SR0NvnLlQRsQ-pS9XPAwY01Nr0GWLdW39dWcBfc0Y3ogQv5yVN1CUkuqNN6~bgO7D6XVGJBY4fH4X3GqGxQVIrdQOI3ZgERVRH0o0UWFOcyfr4QiExN7or5NoF1-Hwux5XbjwME5K2xtyMOclL4kKM9DZxkl4jITmrAinRJVWx625MXOAripzx85oALCUjWGZ3lk47sMSDZBV6Kf492cVhS6as46vDG0XZDSPmTmeRdsy~LDUDSrdIr3hsqzPQCsOqYKJdK1x38ATM35c2GwgKkFjbrcdJFbDu009BpRD1U4NXeFkSKN-~99nNSr5xGT8j-rwjT0lg__" alt="member" />
-                            </div>
-                            <p>John Darcey</p>
-                        </div>
-                        <div className="member-prof">
-                            <div className="member-img-cont">
-                                <img src="https://s3-alpha-sig.figma.com/img/2c36/bc97/e1525a4fed3462b2cbb0eada643893da?Expires=1741564800&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=XytbMq-zDrC6SR0NvnLlQRsQ-pS9XPAwY01Nr0GWLdW39dWcBfc0Y3ogQv5yVN1CUkuqNN6~bgO7D6XVGJBY4fH4X3GqGxQVIrdQOI3ZgERVRH0o0UWFOcyfr4QiExN7or5NoF1-Hwux5XbjwME5K2xtyMOclL4kKM9DZxkl4jITmrAinRJVWx625MXOAripzx85oALCUjWGZ3lk47sMSDZBV6Kf492cVhS6as46vDG0XZDSPmTmeRdsy~LDUDSrdIr3hsqzPQCsOqYKJdK1x38ATM35c2GwgKkFjbrcdJFbDu009BpRD1U4NXeFkSKN-~99nNSr5xGT8j-rwjT0lg__" alt="member" />
-                            </div>
-                            <p>John Darcey</p>
-                        </div>
-                        <div className="member-prof">
-                            <div className="member-img-cont">
-                                <img src="https://s3-alpha-sig.figma.com/img/2c36/bc97/e1525a4fed3462b2cbb0eada643893da?Expires=1741564800&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=XytbMq-zDrC6SR0NvnLlQRsQ-pS9XPAwY01Nr0GWLdW39dWcBfc0Y3ogQv5yVN1CUkuqNN6~bgO7D6XVGJBY4fH4X3GqGxQVIrdQOI3ZgERVRH0o0UWFOcyfr4QiExN7or5NoF1-Hwux5XbjwME5K2xtyMOclL4kKM9DZxkl4jITmrAinRJVWx625MXOAripzx85oALCUjWGZ3lk47sMSDZBV6Kf492cVhS6as46vDG0XZDSPmTmeRdsy~LDUDSrdIr3hsqzPQCsOqYKJdK1x38ATM35c2GwgKkFjbrcdJFbDu009BpRD1U4NXeFkSKN-~99nNSr5xGT8j-rwjT0lg__" alt="member" />
-                            </div>
-                            <p>John Darcey</p>
-                        </div>
-                        <div className="member-prof">
-                            <div className="member-img-cont">
-                                <img src="https://s3-alpha-sig.figma.com/img/2c36/bc97/e1525a4fed3462b2cbb0eada643893da?Expires=1741564800&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=XytbMq-zDrC6SR0NvnLlQRsQ-pS9XPAwY01Nr0GWLdW39dWcBfc0Y3ogQv5yVN1CUkuqNN6~bgO7D6XVGJBY4fH4X3GqGxQVIrdQOI3ZgERVRH0o0UWFOcyfr4QiExN7or5NoF1-Hwux5XbjwME5K2xtyMOclL4kKM9DZxkl4jITmrAinRJVWx625MXOAripzx85oALCUjWGZ3lk47sMSDZBV6Kf492cVhS6as46vDG0XZDSPmTmeRdsy~LDUDSrdIr3hsqzPQCsOqYKJdK1x38ATM35c2GwgKkFjbrcdJFbDu009BpRD1U4NXeFkSKN-~99nNSr5xGT8j-rwjT0lg__" alt="member" />
-                            </div>
-                            <p>John Darcey</p>
-                        </div>
-                        <div className="member-prof">
-                            <div className="member-img-cont">
-                                <img src="https://s3-alpha-sig.figma.com/img/2c36/bc97/e1525a4fed3462b2cbb0eada643893da?Expires=1741564800&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=XytbMq-zDrC6SR0NvnLlQRsQ-pS9XPAwY01Nr0GWLdW39dWcBfc0Y3ogQv5yVN1CUkuqNN6~bgO7D6XVGJBY4fH4X3GqGxQVIrdQOI3ZgERVRH0o0UWFOcyfr4QiExN7or5NoF1-Hwux5XbjwME5K2xtyMOclL4kKM9DZxkl4jITmrAinRJVWx625MXOAripzx85oALCUjWGZ3lk47sMSDZBV6Kf492cVhS6as46vDG0XZDSPmTmeRdsy~LDUDSrdIr3hsqzPQCsOqYKJdK1x38ATM35c2GwgKkFjbrcdJFbDu009BpRD1U4NXeFkSKN-~99nNSr5xGT8j-rwjT0lg__" alt="member" />
-                            </div>
-                            <p>John Darcey</p>
-                        </div>
+                        {
+                            users.map((user, index) => {
+                                return (
+                                    <div className="member-prof" key={index}>
+                                        <div className="member-img-cont">
+                                            <img src={user.image_url} alt="member" />
+                                        </div>
+                                        {/* <p>{user.firstname + " " + user.lastname}</p> */}
+                                        <p>{user.lastname}</p>
+                                    </div>
+                                );
+                            })
+                        }
+
+
                     </div>
                 </div>
             </div>
@@ -321,9 +275,9 @@ export default function Page() {
                             ["John Darcey", "johnd@gmail.com", "Admin", "Active"],
                         ],
                         type: "normal"
-                    }}              
+                    }}
                 />
-                  <Table
+                <Table
                     data={{
                         tableHeaders: ["Name", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
                         tableData: [
@@ -334,9 +288,9 @@ export default function Page() {
                             ["John Doe", "red", "green", "red", "green", "red", "red", "red", "green", "green", "green", "red", "red"],
                         ],
                         type: "colored"
-                    }}              
+                    }}
                 />
-                
+
             </div>
         </div>
     )

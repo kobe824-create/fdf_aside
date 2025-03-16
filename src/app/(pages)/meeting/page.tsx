@@ -1,12 +1,120 @@
 "use client";
 import Table from "@/components/table";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import formatMeetingDate from "@/utils/timeFormatter";
+import Button from "@/components/button";
+import AttachmentPopup from "@/components/attachmentPopup";
+import EditAttendancePopup from "@/components/editAttendancePopup";
 
 export default function Meeting() {
+    const router = useRouter();
+
+    const params = useSearchParams();
+    const meetingId = params.get("id");
+
+    const [popupDisplay, setPopupDisplay] = useState(false);
+
+
+    const [absents, setAbsents] = useState(0);
+    const [presents, setPresents] = useState(0);
+    const [lates, setLates] = useState(0);
+
+
+
+
+    const [update, setUpdate] = useState(0);
+
+    const [meeting, setMeeting] = useState({
+        title: "",
+        date: new Date(),
+        startTime: new Date(),
+        endTime: new Date(),
+        location: "",
+        description: "",
+        activities: [
+            {
+                title: "",
+                author: "",
+                description: "",
+                createdAt: new Date()
+            }
+        ],
+        attachments: [
+            {
+                name: "",
+                url: "",
+                size: 0,
+            }
+        ],
+        attendances: [
+            {
+                user: {
+                    firstname: "",
+                    lastname: "",
+                },
+                status: "",
+                checkIn: new Date(),
+                _id: "",
+                key: ""
+            }
+        ]
+    });
+
+    useEffect(() => {
+        axios.post("/api/meetings/getOne", { meetingId }).then(res => {
+            setMeeting(res.data.meeting);
+            setAbsents(res.data.meeting.attendances.filter((attendance: { status: string }) => attendance.status === "absent").length);
+            setPresents(res.data.meeting.attendances.filter((attendance: { status: string }) => attendance.status === "present").length);
+            setLates(res.data.meeting.attendances.filter((attendance: { status: string }) => attendance.status === "late").length);
+
+            console.log(res.data.meeting.attendances);
+        }).catch(err => {
+            console.log(err);
+        })
+    }, [update]);
+
+
+    const [popup, setPopup] = useState(<AttachmentPopup
+        closePopup={() => {
+            setPopupDisplay(false);
+        }}
+        id={meetingId}
+        setUpdate={setUpdate}
+    />);
+
+    const deleteMeeting = async () => {
+        try {
+            const res = await axios.post(`/api/meetings/delete`, {meetingId});
+            console.log(res.data);
+            router.push("/meetings");
+        } catch (error) {
+            console.error("Delete failed", error);
+        }
+    }
+
     return (
         <div className="meeting-page">
+            <div className="popup-background"
+                style={{ display: popupDisplay ? "flex" : "none" }}
+                onClick={() => {
+                    setPopupDisplay(false);
+                }}
+            >
+                {popup}
+            </div>
 
             <div className="meeting-body">
-                <h2>Meeting</h2>
+                <h2>
+                    Meeting
+                    <Button
+                    label="Delete Meeting"
+                    onClick={deleteMeeting}
+                    className="button-primary"
+                    />
+                </h2>
                 <div className="meeting-content">
                     <div className="meeting-side-bar">
                         <div className="meeting-side-bar-top">
@@ -17,7 +125,7 @@ export default function Meeting() {
                                 </svg>
                                 <div className="meeting-infos-cont">
                                     <h4>Meeting Title</h4>
-                                    <p>Finance Strategy Meeting</p>
+                                    <p>{meeting.title}</p>
                                 </div>
                             </div>
                             <div className="meeting-infos">
@@ -26,7 +134,10 @@ export default function Meeting() {
                                 </svg>
                                 <div className="meeting-infos-cont">
                                     <h4>Date & Time</h4>
-                                    <p>15 Feb 2025, 10:00 AM</p>
+                                    <p>
+                                        {formatMeetingDate(meeting.date.toString(), meeting.startTime.toString(), meeting.endTime.toString())}
+                                    </p>
+
                                 </div>
                             </div>
                             <div className="meeting-infos">
@@ -35,7 +146,7 @@ export default function Meeting() {
                                 </svg>
                                 <div className="meeting-infos-cont">
                                     <h4>Total Attended on time</h4>
-                                    <p>20 Members </p>
+                                    <p>{presents} Members </p>
                                 </div>
                             </div>
                             <div className="meeting-infos">
@@ -44,7 +155,7 @@ export default function Meeting() {
                                 </svg>
                                 <div className="meeting-infos-cont">
                                     <h4>Total attended Late</h4>
-                                    <p>5 Members</p>
+                                    <p>{lates} Members</p>
                                 </div>
                             </div>
                             <div className="meeting-infos">
@@ -53,14 +164,31 @@ export default function Meeting() {
                                 </svg>
                                 <div className="meeting-infos-cont">
                                     <h4>Total Absent</h4>
-                                    <p>5 Members</p>
+                                    <p>{absents} Members</p>
                                 </div>
                             </div>
 
                         </div>
                         <div className="meeting-side-bar-top">
-                            <h3>Attachments</h3>
-                            <div className="attachment">
+                            <h3>
+                                Attachments
+                                <Button
+                                    label="Add Attachment"
+                                    className="button-primary"
+                                    onClick={() => {
+                                        setPopupDisplay(true);
+                                        setPopup(<AttachmentPopup
+                                            closePopup={() => {
+                                                setPopupDisplay(false);
+                                            }}
+                                            id={meetingId}
+                                            setUpdate={setUpdate}
+                                        />
+                                        )
+                                    }}
+                                />
+                            </h3>
+                            {/* <div className="attachment">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
                                     <path fillRule="evenodd" clipRule="evenodd" d="M6.6665 5.8335C6.6665 4.45278 7.78579 3.3335 9.1665 3.3335H25.631C26.294 3.3335 26.9299 3.59689 27.3987 4.06573L32.6009 9.26793C33.0698 9.73677 33.3332 10.3727 33.3332 11.0357V34.1668C33.3332 35.5475 32.2139 36.6668 30.8332 36.6668H9.1665C7.78579 36.6668 6.6665 35.5475 6.6665 34.1668V5.8335ZM31.6665 11.6668H25.8332C25.3729 11.6668 24.9998 11.2937 24.9998 10.8335V5.00016H9.1665C8.70627 5.00016 8.33317 5.37326 8.33317 5.8335V34.1668C8.33317 34.6271 8.70627 35.0002 9.1665 35.0002H30.8332C31.2934 35.0002 31.6665 34.6271 31.6665 34.1668V11.6668Z" fill="#F1F2F4" />
                                     <path d="M6.6665 15.8335H33.3332V25.8335H6.6665V15.8335Z" fill="#3B82F6" />
@@ -83,41 +211,49 @@ export default function Meeting() {
                                         </clipPath>
                                     </defs>
                                 </svg>
-                            </div>
-                            <div className="attachment">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
-                                    <path fillRule="evenodd" clipRule="evenodd" d="M6.6665 5.8335C6.6665 4.45278 7.78579 3.3335 9.1665 3.3335H25.631C26.294 3.3335 26.9299 3.59689 27.3987 4.06573L32.6009 9.26793C33.0698 9.73677 33.3332 10.3727 33.3332 11.0357V34.1668C33.3332 35.5475 32.2139 36.6668 30.8332 36.6668H9.1665C7.78579 36.6668 6.6665 35.5475 6.6665 34.1668V5.8335ZM31.6665 11.6668H25.8332C25.3729 11.6668 24.9998 11.2937 24.9998 10.8335V5.00016H9.1665C8.70627 5.00016 8.33317 5.37326 8.33317 5.8335V34.1668C8.33317 34.6271 8.70627 35.0002 9.1665 35.0002H30.8332C31.2934 35.0002 31.6665 34.6271 31.6665 34.1668V11.6668Z" fill="#F1F2F4" />
-                                    <path d="M6.6665 15.8335H33.3332V25.8335H6.6665V15.8335Z" fill="#F21E1E" />
-                                    <path d="M12.1255 24.1666V18.106H14.629C15.0828 18.106 15.4744 18.1947 15.8039 18.3723C16.1353 18.5479 16.3908 18.7935 16.5703 19.1092C16.7499 19.4228 16.8396 19.7878 16.8396 20.2041C16.8396 20.6223 16.7479 20.9883 16.5644 21.302C16.3829 21.6137 16.1235 21.8554 15.7861 22.027C15.4488 22.1986 15.0483 22.2845 14.5847 22.2845H13.0399V21.1303H14.3124C14.5334 21.1303 14.7178 21.0919 14.8658 21.0149C15.0157 20.938 15.1292 20.8305 15.2061 20.6924C15.283 20.5523 15.3215 20.3895 15.3215 20.2041C15.3215 20.0167 15.283 19.8549 15.2061 19.7188C15.1292 19.5807 15.0157 19.4741 14.8658 19.3992C14.7158 19.3242 14.5314 19.2867 14.3124 19.2867H13.5903V24.1666H12.1255Z" fill="white" />
-                                    <path d="M19.8019 24.1666H17.5617V18.106H19.7989C20.4164 18.106 20.9481 18.2273 21.394 18.4699C21.8418 18.7106 22.187 19.0579 22.4297 19.5116C22.6724 19.9634 22.7937 20.504 22.7937 21.1333C22.7937 21.7646 22.6724 22.3071 22.4297 22.7609C22.189 23.2147 21.8448 23.5629 21.3969 23.8055C20.9491 24.0462 20.4174 24.1666 19.8019 24.1666ZM19.0265 22.9177H19.7456C20.085 22.9177 20.372 22.8605 20.6068 22.7461C20.8435 22.6297 21.0221 22.4413 21.1424 22.1809C21.2647 21.9185 21.3259 21.5693 21.3259 21.1333C21.3259 20.6973 21.2647 20.3501 21.1424 20.0916C21.0201 19.8312 20.8396 19.6438 20.6009 19.5294C20.3641 19.413 20.0721 19.3548 19.7249 19.3548H19.0265V22.9177Z" fill="white" />
-                                    <path d="M23.6489 24.1666V18.106H27.786V19.2956H25.1138V20.5385H27.5226V21.7311H25.1138V24.1666H23.6489Z" fill="white" />
-                                </svg>
-                                <div className="attachment-infos">
-                                    <h4>Site survey</h4>
-                                    <p>300 KB</p>
-                                </div>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none" className="download-attachment-icon">
-                                    <g clipPath="url(#clip0_220_7263)">
-                                        <path d="M6.58565 12.0813C6.77138 12.2672 6.99192 12.4146 7.23465 12.5152C7.47738 12.6158 7.73756 12.6676 8.00031 12.6676C8.26306 12.6676 8.52324 12.6158 8.76598 12.5152C9.00871 12.4146 9.22925 12.2672 9.41498 12.0813L11.5556 9.94067C11.6704 9.81373 11.732 9.64752 11.7276 9.47644C11.7232 9.30536 11.6532 9.14253 11.532 9.02165C11.4109 8.90077 11.2479 8.8311 11.0768 8.82707C10.9058 8.82304 10.7397 8.88496 10.613 9L8.66231 10.9513L8.66698 0.666667C8.66698 0.489856 8.59674 0.320286 8.47172 0.195262C8.34669 0.0702379 8.17712 0 8.00031 0V0C7.8235 0 7.65393 0.0702379 7.52891 0.195262C7.40388 0.320286 7.33365 0.489856 7.33365 0.666667L7.32765 10.9387L5.38765 9C5.26255 8.875 5.09292 8.8048 4.91608 8.80486C4.73923 8.80493 4.56965 8.87524 4.44465 9.00033C4.31964 9.12543 4.24945 9.29506 4.24951 9.4719C4.24957 9.64875 4.31989 9.81833 4.44498 9.94333L6.58565 12.0813Z" fill="#727A90" />
-                                        <path d="M15.3333 10.6665C15.1565 10.6665 14.987 10.7367 14.8619 10.8618C14.7369 10.9868 14.6667 11.1564 14.6667 11.3332V13.9998C14.6667 14.1766 14.5964 14.3462 14.4714 14.4712C14.3464 14.5963 14.1768 14.6665 14 14.6665H2C1.82319 14.6665 1.65362 14.5963 1.5286 14.4712C1.40357 14.3462 1.33333 14.1766 1.33333 13.9998V11.3332C1.33333 11.1564 1.2631 10.9868 1.13807 10.8618C1.01305 10.7367 0.843478 10.6665 0.666667 10.6665C0.489856 10.6665 0.320286 10.7367 0.195262 10.8618C0.0702379 10.9868 0 11.1564 0 11.3332L0 13.9998C0 14.5303 0.210714 15.039 0.585786 15.414C0.960859 15.7891 1.46957 15.9998 2 15.9998H14C14.5304 15.9998 15.0391 15.7891 15.4142 15.414C15.7893 15.039 16 14.5303 16 13.9998V11.3332C16 11.1564 15.9298 10.9868 15.8047 10.8618C15.6797 10.7367 15.5101 10.6665 15.3333 10.6665Z" fill="#727A90" />
-                                    </g>
-                                    <defs>
-                                        <clipPath id="clip0_220_7263">
-                                            <rect width="16" height="16" fill="white" />
-                                        </clipPath>
-                                    </defs>
-                                </svg>
-                            </div>
+                            </div> */}
+
+                            {
+                                meeting.attachments.map((attachment, index) => {
+                                    return (
+                                        <div className="attachment" key={index}>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
+                                                <path fillRule="evenodd" clipRule="evenodd" d="M6.6665 5.8335C6.6665 4.45278 7.78579 3.3335 9.1665 3.3335H25.631C26.294 3.3335 26.9299 3.59689 27.3987 4.06573L32.6009 9.26793C33.0698 9.73677 33.3332 10.3727 33.3332 11.0357V34.1668C33.3332 35.5475 32.2139 36.6668 30.8332 36.6668H9.1665C7.78579 36.6668 6.6665 35.5475 6.6665 34.1668V5.8335ZM31.6665 11.6668H25.8332C25.3729 11.6668 24.9998 11.2937 24.9998 10.8335V5.00016H9.1665C8.70627 5.00016 8.33317 5.37326 8.33317 5.8335V34.1668C8.33317 34.6271 8.70627 35.0002 9.1665 35.0002H30.8332C31.2934 35.0002 31.6665 34.6271 31.6665 34.1668V11.6668Z" fill="#F1F2F4" />
+                                                <path d="M6.6665 15.8335H33.3332V25.8335H6.6665V15.8335Z" fill="#F21E1E" />
+                                                <path d="M12.1255 24.1666V18.106H14.629C15.0828 18.106 15.4744 18.1947 15.8039 18.3723C16.1353 18.5479 16.3908 18.7935 16.5703 19.1092C16.7499 19.4228 16.8396 19.7878 16.8396 20.2041C16.8396 20.6223 16.7479 20.9883 16.5644 21.302C16.3829 21.6137 16.1235 21.8554 15.7861 22.027C15.4488 22.1986 15.0483 22.2845 14.5847 22.2845H13.0399V21.1303H14.3124C14.5334 21.1303 14.7178 21.0919 14.8658 21.0149C15.0157 20.938 15.1292 20.8305 15.2061 20.6924C15.283 20.5523 15.3215 20.3895 15.3215 20.2041C15.3215 20.0167 15.283 19.8549 15.2061 19.7188C15.1292 19.5807 15.0157 19.4741 14.8658 19.3992C14.7158 19.3242 14.5314 19.2867 14.3124 19.2867H13.5903V24.1666H12.1255Z" fill="white" />
+                                                <path d="M19.8019 24.1666H17.5617V18.106H19.7989C20.4164 18.106 20.9481 18.2273 21.394 18.4699C21.8418 18.7106 22.187 19.0579 22.4297 19.5116C22.6724 19.9634 22.7937 20.504 22.7937 21.1333C22.7937 21.7646 22.6724 22.3071 22.4297 22.7609C22.189 23.2147 21.8448 23.5629 21.3969 23.8055C20.9491 24.0462 20.4174 24.1666 19.8019 24.1666ZM19.0265 22.9177H19.7456C20.085 22.9177 20.372 22.8605 20.6068 22.7461C20.8435 22.6297 21.0221 22.4413 21.1424 22.1809C21.2647 21.9185 21.3259 21.5693 21.3259 21.1333C21.3259 20.6973 21.2647 20.3501 21.1424 20.0916C21.0201 19.8312 20.8396 19.6438 20.6009 19.5294C20.3641 19.413 20.0721 19.3548 19.7249 19.3548H19.0265V22.9177Z" fill="white" />
+                                                <path d="M23.6489 24.1666V18.106H27.786V19.2956H25.1138V20.5385H27.5226V21.7311H25.1138V24.1666H23.6489Z" fill="white" />
+                                            </svg>
+                                            <div className="attachment-infos">
+                                                <h4>{attachment.name.length > 20 ? `${attachment.name.slice(0, 20)}...` : attachment.name}</h4>
+
+                                                <p>{Math.floor(attachment.size / 1000)} KB</p>
+                                            </div>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none" className="download-attachment-icon">
+                                                <g clipPath="url(#clip0_220_7263)">
+                                                    <path d="M6.58565 12.0813C6.77138 12.2672 6.99192 12.4146 7.23465 12.5152C7.47738 12.6158 7.73756 12.6676 8.00031 12.6676C8.26306 12.6676 8.52324 12.6158 8.76598 12.5152C9.00871 12.4146 9.22925 12.2672 9.41498 12.0813L11.5556 9.94067C11.6704 9.81373 11.732 9.64752 11.7276 9.47644C11.7232 9.30536 11.6532 9.14253 11.532 9.02165C11.4109 8.90077 11.2479 8.8311 11.0768 8.82707C10.9058 8.82304 10.7397 8.88496 10.613 9L8.66231 10.9513L8.66698 0.666667C8.66698 0.489856 8.59674 0.320286 8.47172 0.195262C8.34669 0.0702379 8.17712 0 8.00031 0V0C7.8235 0 7.65393 0.0702379 7.52891 0.195262C7.40388 0.320286 7.33365 0.489856 7.33365 0.666667L7.32765 10.9387L5.38765 9C5.26255 8.875 5.09292 8.8048 4.91608 8.80486C4.73923 8.80493 4.56965 8.87524 4.44465 9.00033C4.31964 9.12543 4.24945 9.29506 4.24951 9.4719C4.24957 9.64875 4.31989 9.81833 4.44498 9.94333L6.58565 12.0813Z" fill="#727A90" />
+                                                    <path d="M15.3333 10.6665C15.1565 10.6665 14.987 10.7367 14.8619 10.8618C14.7369 10.9868 14.6667 11.1564 14.6667 11.3332V13.9998C14.6667 14.1766 14.5964 14.3462 14.4714 14.4712C14.3464 14.5963 14.1768 14.6665 14 14.6665H2C1.82319 14.6665 1.65362 14.5963 1.5286 14.4712C1.40357 14.3462 1.33333 14.1766 1.33333 13.9998V11.3332C1.33333 11.1564 1.2631 10.9868 1.13807 10.8618C1.01305 10.7367 0.843478 10.6665 0.666667 10.6665C0.489856 10.6665 0.320286 10.7367 0.195262 10.8618C0.0702379 10.9868 0 11.1564 0 11.3332L0 13.9998C0 14.5303 0.210714 15.039 0.585786 15.414C0.960859 15.7891 1.46957 15.9998 2 15.9998H14C14.5304 15.9998 15.0391 15.7891 15.4142 15.414C15.7893 15.039 16 14.5303 16 13.9998V11.3332C16 11.1564 15.9298 10.9868 15.8047 10.8618C15.6797 10.7367 15.5101 10.6665 15.3333 10.6665Z" fill="#727A90" />
+                                                </g>
+                                                <defs>
+                                                    <clipPath id="clip0_220_7263">
+                                                        <rect width="16" height="16" fill="white" />
+                                                    </clipPath>
+                                                </defs>
+                                            </svg>
+                                        </div>)
+                                })
+                            }
+
                         </div>
                     </div>
                     <div className="meeting-right-side">
                         <div className="meeting-agenda">
                             <h3>Meeting Agenda</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris suscipit eget lorem sit amet pulvinar. Vestibulum placerat aliquam ligula, eu pretium nisi finibus vel. Ut dictum nisl id mollis accumsan. Vivamus ac justo sollicitudin, malesuada neque quis, laoreet neque. Phasellus mattis suscipit ex, in sagittis libero fringilla quis. Praesent in imperdiet lacus</p>
+                            <p>{meeting.description}</p>
                         </div>
                         <div className="meeting-activities">
-                            <h3>Activity</h3>
-                            <div className="activity">
+                            <h3>Activities</h3>
+                            {/* <div className="activity">
                                 <div className="big-circle">
                                     <div className="small-circle"></div>
                                 </div>
@@ -171,7 +307,25 @@ export default function Meeting() {
                                     <h4>New Comment</h4>
                                     <p><span>Benjamin Gainyllo Joel</span> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris suscipit eget lorem </p>
                                 </div>
-                            </div>
+                            </div> */}
+                            {
+                                meeting.activities.map((activity, index) => {
+                                    return (
+                                        <div className="activity" key={index}>
+                                            <div className="big-circle">
+                                                <div className="small-circle"></div>
+                                            </div>
+                                            <div className="activity-content">
+                                                <h4>{activity.title}</h4>
+                                                <p><span>{activity.author}</span> {activity.description}</p>
+                                                <span className="activity-time">
+                                                    {formatMeetingDate(activity.createdAt.toString().split("T")[0], activity.createdAt.toString().split("T")[1], null)}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    )
+                                })
+                            }
                         </div>
                     </div>
                 </div>
@@ -180,16 +334,32 @@ export default function Meeting() {
 
                     <Table
                         data={{
-                            tableHeaders: ["Name", "Status", "CheckIn time"],
-                            tableData: [
-                                ["John Darcey", "Absent", "07:30 PM"],
-                                ["John Darcey", "Present", "06:00 PM"],
-                                ["John Darcey", "Absent", "07:30 PM"],
-                                ["John Darcey", "Present", "06:00 PM"],
-                                ["John Darcey", "Absent", "07:30 PM"],
-                                ["John Darcey", "Present", "06:00 PM"],
-                                ["John Darcey", "Absent", "07:30 PM"]
-                            ],
+                            tableHeaders: ["Name", "Status", "CheckIn time", "Keys", "Actions"],
+                            tableData: meeting.attendances.map((attendance) => {
+                                return [
+                                    attendance.user.firstname + " " + attendance.user.lastname,
+                                    attendance.status,
+                                    attendance.checkIn ? formatMeetingDate(attendance.checkIn.toString().split("T")[0], attendance.checkIn.toString().split("T")[1], null) : "Not checked in",
+                                    attendance.key,
+                                    <Button
+                                        key={attendance._id}
+                                        label="Edit Status"
+                                        className="button-primary"
+                                        onClick={() => {
+                                            setPopupDisplay(true);
+                                            setPopup(
+                                                <EditAttendancePopup
+                                                    closePopup={() => {
+                                                        setPopupDisplay(false);
+                                                    }}
+                                                    attendanceId={attendance._id}
+                                                    setUpdate={setUpdate}
+                                                />
+                                            )
+                                        }}
+                                    />
+                                ]
+                            }),
                             type: "normal"
                         }}
                     />

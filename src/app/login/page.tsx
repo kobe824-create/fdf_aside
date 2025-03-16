@@ -6,12 +6,20 @@ import LogoContainer from "@/components/logoContainer";
 import MarkAttendancePopup from "@/components/markAttendancePopup";
 import OtpField from "@/components/otpField";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+import OtpLogin from "@/components/otpLogin";
 
 export default function Page() {
+    const router = useRouter();
     const [popupDisplay, setPopupDisplay] = useState(false);
     const handleJoinMeeting =  (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault()
         setPopupDisplay(true)
+    }
+
+    const handleSignIn =  (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault()
+        router.push("/overview")
     }
     return (
         <div className="login-page-wrapper">
@@ -23,13 +31,13 @@ export default function Page() {
                     closePopup={() => setPopupDisplay(false)}
                 />
             </div>
-            <form className="login-form">
+            <div className="login-form">
                 <LogoContainer />
                 <div className="login-page-heading">
                     <p>Welcome back!!</p>
                     <h1>Please Sign In</h1>
                 </div>
-                <fieldset>
+                {/* <fieldset>
                     <FormField
                         label="Phone Number"
                         type="text"
@@ -54,20 +62,22 @@ export default function Page() {
                         }}
                     />
 
-                </fieldset>
-                <Button
+                </fieldset> */}
+                {/* <Button
                     label="Sign In"
-                    onClick={() => {
-                        console.log("Sign In");
-                    }}
+                    onClick={handleSignIn}
                     className="button-primary"
-                />
+                /> */}
+              
+
+                <OtpLogin/>
                 <Button
                     label="Join Meeting"
                     onClick={handleJoinMeeting}
                     className="button-primary"
+                    disabled={true}
                 />
-            </form>
+            </div>
         </div>
     );
 }
