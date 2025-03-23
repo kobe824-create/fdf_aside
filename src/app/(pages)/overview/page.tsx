@@ -5,7 +5,7 @@ import Table from "@/components/table";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { UserTypes } from "@/utils/types";
-import { useAuth } from "@/components/authProvider";
+import { useAuth } from "@/lib/auth/authProvider";
 
 
 export default function Page() {
@@ -281,6 +281,21 @@ export default function Page() {
                     data={{
                         tableHeaders: ["Name", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
                         tableData: [
+                            ["John Doe", "red", "green", "red", "red", "red", "green", "red", "red", "green", "green", "red", "red"],
+                            ["John Doe", "red", "green", "red", "red", "red", "red", "red", "red", "green", "red", "red", "green"],
+                            ["John Doe", "red", "green", "red", "red", "red", "green", "red", "red", "green", "green", "red", "red"],
+                            ["John Doe", "red", "green", "red", "red", "red", "green", "red", "green", "red", "red", "red", "green"],
+                            ["John Doe", "red", "green", "red", "green", "red", "red", "red", "green", "green", "green", "red", "red"],
+                            ["John Doe", "red", "green", "red", "red", "red", "green", "red", "red", "green", "green", "red", "red"],
+                            ["John Doe", "red", "green", "red", "red", "red", "red", "red", "red", "green", "red", "red", "green"],
+                            ["John Doe", "red", "green", "red", "red", "red", "green", "red", "red", "green", "green", "red", "red"],
+                            ["John Doe", "red", "green", "red", "red", "red", "green", "red", "green", "red", "red", "red", "green"],
+                            ["John Doe", "red", "green", "red", "green", "red", "red", "red", "green", "green", "green", "red", "red"],
+                            ["John Doe", "red", "green", "red", "red", "red", "green", "red", "red", "green", "green", "red", "red"],
+                            ["John Doe", "red", "green", "red", "red", "red", "red", "red", "red", "green", "red", "red", "green"],
+                            ["John Doe", "red", "green", "red", "red", "red", "green", "red", "red", "green", "green", "red", "red"],
+                            ["John Doe", "red", "green", "red", "red", "red", "green", "red", "green", "red", "red", "red", "green"],
+                            ["John Doe", "red", "green", "red", "green", "red", "red", "red", "green", "green", "green", "red", "red"],
                             ["John Doe", "red", "green", "red", "red", "red", "green", "red", "red", "green", "green", "red", "red"],
                             ["John Doe", "red", "green", "red", "red", "red", "red", "red", "red", "green", "red", "red", "green"],
                             ["John Doe", "red", "green", "red", "red", "red", "green", "red", "red", "green", "green", "red", "red"],

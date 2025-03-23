@@ -8,10 +8,13 @@ export async function POST(request: NextRequest) {
     await connect();
     try {
         const reqBody = await request.json();
-        const {phoneNumber} = reqBody;
+        let {phoneNumber} = reqBody;
 
+        if (phoneNumber.includes("+")) {
+            phoneNumber = phoneNumber.replace("+", "");
+        }
 
-        const user = await User.findOne({phoneNumber});
+        const user = await User.findOne({phoneNumber}).populate("otp");
         if(!user) {
             return NextResponse.json({message: "user not found"}, {status: 404})
         }

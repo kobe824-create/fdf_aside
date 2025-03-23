@@ -2,7 +2,7 @@
 import FinancialCard from "@/components/financialCard";
 import { useRouter } from "next/navigation";
 
-import { useAuth } from "@/components/authProvider";
+import { useAuth } from "@/lib/auth/authProvider"
 import { UserTypes } from "@/utils/types";
 import { useEffect, useState } from "react";
 import axios from "axios";

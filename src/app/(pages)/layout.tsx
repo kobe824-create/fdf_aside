@@ -1,10 +1,8 @@
 "use client";
 import LogoContainer from "@/components/logoContainer";
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { useAuth } from "@/components/authProvider";
-import { signOut } from "@firebase/auth";
-import { auth } from "@/firebase";
+import { useAuth } from "@/lib/auth/authProvider";
 import { UserTypes } from "@/utils/types";
 import axios from "axios";
 
@@ -18,7 +16,7 @@ export default function TabsLayout({
 
     const router = useRouter();
 
-    const { user, loading } = useAuth();
+    const { user, loading, logout } = useAuth();
 
 
 
@@ -185,10 +183,7 @@ export default function TabsLayout({
                     </div>
                     <div className="side-bar-bottom-container"
                         onClick={() => {
-                            if (user) {
-                                signOut(auth);
-                                router.push("/login");
-                            }
+                            logout();
                         }}
                     >
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">

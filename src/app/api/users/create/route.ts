@@ -1,9 +1,9 @@
 import { NextResponse, NextRequest } from "next/server";
 import User from "@/models/userModel";
 import connect from "@/dbConfig/dbConfig";
-import fs, { writeFile } from "fs/promises";
-import path from "path";
-
+// import fs, { writeFile } from "fs/promises";
+// import path from "path";
+import { writeFile } from "fs/promises";
 
 
 export async function POST(request: NextRequest) {

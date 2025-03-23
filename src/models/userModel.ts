@@ -1,4 +1,4 @@
-import mongoose from "mongoose"
+import mongoose from "mongoose";
 
 
 const userSchema = new mongoose.Schema({
@@ -46,7 +46,14 @@ const userSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: "Notification",
         },
-    ]
+    ],
+    otp: {
+        type: String,
+        ref: "Otp",
+    },
+    password: {
+        type: String,
+    },
 },{ timestamps: true });
 
 const User = mongoose.models?.User || mongoose.model("User", userSchema);

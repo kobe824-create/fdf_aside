@@ -151,21 +151,22 @@ export default function Members() {
         </table>
         <div className="table-bottom">
           {/* <p>Showing 1-10 from 100</p> */}
-          <div className="pagination">
+          {filteredUsers.length > itemsPerPage && (
+            <div className="pagination">
 
-            <div className="page" onClick={() => {
-              if (currentPage > 1) {
-                paginate(currentPage - 1)
+              <div className="page" onClick={() => {
+                if (currentPage > 1) {
+                  paginate(currentPage - 1)
+                }
               }
-            }
-            } style={{ cursor: currentPage === 1 ? 'not-allowed' : 'pointer' }}>
-              <svg xmlns="http://www.w3.org/2000/svg" width="6" height="10" viewBox="0 0 6 10" fill="none">
-                <path d="M4.86015 9.3934L1.14015 5.66673C1.01598 5.54183 0.946289 5.37286 0.946289 5.19673C0.946289 5.02061 1.01598 4.85164 1.14015 4.72673L4.86015 1.00007C4.9534 0.906047 5.07253 0.841927 5.20236 0.815881C5.3322 0.789834 5.46684 0.803042 5.58914 0.85382C5.71143 0.904598 5.81584 0.990645 5.88904 1.10099C5.96224 1.21134 6.00092 1.34098 6.00015 1.4734V8.92007C6.00092 9.05248 5.96224 9.18212 5.88904 9.29247C5.81584 9.40282 5.71143 9.48887 5.58914 9.53965C5.46684 9.59042 5.3322 9.60363 5.20236 9.57758C5.07253 9.55153 4.9534 9.48741 4.86015 9.3934Z" fill="#727A90" />
-              </svg>
-            </div>
+              } style={{ cursor: currentPage === 1 ? 'not-allowed' : 'pointer' }}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="6" height="10" viewBox="0 0 6 10" fill="none">
+                  <path d="M4.86015 9.3934L1.14015 5.66673C1.01598 5.54183 0.946289 5.37286 0.946289 5.19673C0.946289 5.02061 1.01598 4.85164 1.14015 4.72673L4.86015 1.00007C4.9534 0.906047 5.07253 0.841927 5.20236 0.815881C5.3322 0.789834 5.46684 0.803042 5.58914 0.85382C5.71143 0.904598 5.81584 0.990645 5.88904 1.10099C5.96224 1.21134 6.00092 1.34098 6.00015 1.4734V8.92007C6.00092 9.05248 5.96224 9.18212 5.88904 9.29247C5.81584 9.40282 5.71143 9.48887 5.58914 9.53965C5.46684 9.59042 5.3322 9.60363 5.20236 9.57758C5.07253 9.55153 4.9534 9.48741 4.86015 9.3934Z" fill="#727A90" />
+                </svg>
+              </div>
 
 
-            {/* <div className="page">
+              {/* <div className="page">
               <p>1</p>
             </div>
             <div className="page">
@@ -184,23 +185,24 @@ export default function Members() {
               <p>...</p>
             </div> */}
 
-            {Array.from({ length: Math.ceil(filteredUsers.length / itemsPerPage) }, (_, index) => (
-              <div key={index} className={`page ${ currentPage === index + 1 ? "active" : "" }`} onClick={() => paginate(index + 1)}>
-                <p>{index + 1}</p>
+              {Array.from({ length: Math.ceil(filteredUsers.length / itemsPerPage) }, (_, index) => (
+                <div key={index} className={`page ${currentPage === index + 1 ? "active" : ""}`} onClick={() => paginate(index + 1)}>
+                  <p>{index + 1}</p>
+                </div>
+              ))}
+
+
+              <div className="page" onClick={() => {
+                if (currentPage < Math.ceil(filteredUsers.length / itemsPerPage)) {
+                  paginate(currentPage + 1);
+                }
+              }} style={{ cursor: currentPage === Math.ceil(filteredUsers.length / itemsPerPage) ? 'not-allowed' : 'pointer' }}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="6" height="10" viewBox="0 0 6 10" fill="none">
+                  <path d="M1.13985 9.3934L4.85985 5.66673C4.98402 5.54183 5.05371 5.37286 5.05371 5.19673C5.05371 5.02061 4.98402 4.85164 4.85985 4.72673L1.13985 1.00007C1.0466 0.906047 0.927473 0.841927 0.79764 0.815881C0.667801 0.789834 0.53316 0.803042 0.410852 0.85382C0.288544 0.904598 0.184135 0.990645 0.110939 1.10099C0.0377384 1.21134 0 1.34098 0 1.4734V8.92007C0 9.05248 0.0377384 9.18212 0.110939 9.29247C0.184135 9.40282 0.288544 9.48887 0.410852 9.53965C0.53316 9.59042 0.667801 9.60363 0.79764 9.57758C0.927473 9.55153 1.0466 9.48741 1.13985 9.3934Z" fill="#727A90" />
+                </svg>
               </div>
-            ))}
-
-
-            <div className="page" onClick={() => {
-              if (currentPage < Math.ceil(filteredUsers.length / itemsPerPage)) {
-                paginate(currentPage + 1);
-              }
-            }} style={{ cursor: currentPage === Math.ceil(filteredUsers.length / itemsPerPage) ? 'not-allowed' : 'pointer' }}>
-              <svg xmlns="http://www.w3.org/2000/svg" width="6" height="10" viewBox="0 0 6 10" fill="none">
-                <path d="M1.13985 9.3934L4.85985 5.66673C4.98402 5.54183 5.05371 5.37286 5.05371 5.19673C5.05371 5.02061 4.98402 4.85164 4.85985 4.72673L1.13985 1.00007C1.0466 0.906047 0.927473 0.841927 0.79764 0.815881C0.667801 0.789834 0.53316 0.803042 0.410852 0.85382C0.288544 0.904598 0.184135 0.990645 0.110939 1.10099C0.0377384 1.21134 0 1.34098 0 1.4734V8.92007C0 9.05248 0.0377384 9.18212 0.110939 9.29247C0.184135 9.40282 0.288544 9.48887 0.410852 9.53965C0.53316 9.59042 0.667801 9.60363 0.79764 9.57758C0.927473 9.55153 1.0466 9.48741 1.13985 9.3934Z" fill="#727A90" />
-              </svg>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </div>

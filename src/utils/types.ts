@@ -13,6 +13,7 @@ export interface UserTypes {
     createdAt: string;
     updatedAt: string;
     __v?: number;
+    otp?: string | OtpTypes;
 }
 export interface ContributionTypes {
     _id?: string;
@@ -21,6 +22,17 @@ export interface ContributionTypes {
     date: string;
     status: string;
     penalties?: string[];
+    createdAt: string;
+    updatedAt: string;
+    __v?: number;
+}
+
+export interface OtpTypes {
+    _id?: string;
+    otp: string;
+    phoneNumber: number;
+    isUsed: boolean;
+    expiry: Date;
     createdAt: string;
     updatedAt: string;
     __v?: number;

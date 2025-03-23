@@ -267,6 +267,18 @@ input {
   outline: none;
 }
 
+.password-input {
+  width: 100%;
+  position: relative;
+}
+.password-input i {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
 /*checkbox*/
 .checkbox {
   gap: 4px;
