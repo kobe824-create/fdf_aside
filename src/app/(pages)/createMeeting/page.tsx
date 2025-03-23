@@ -5,6 +5,7 @@ import TextAreaField from "@/components/textAreaField";
 import { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 export default function Page() {
 
@@ -25,6 +26,7 @@ export default function Page() {
             const response = await axios.post("/api/meetings/create", meeting);
             if (response.status === 201) {
                 console.log("Meeting created successfully");
+                toast.success("Meeting created successfully")
                 router.push("/meetings");
             }
         } catch (error: unknown) {
@@ -38,11 +40,10 @@ export default function Page() {
 
     return (
         <div className="create-meeting-page">
-            <form className="create-meeting-form">
+            <form className="create-meeting-form" onSubmit={handleCreateMeeting}>
                 <h1>Create a New Event</h1>
                 <div className="create-meeting-page-section">
                     <h3>Event Details</h3>
-
                     <FormField
                         label="Title"
                         type="text"
@@ -54,8 +55,6 @@ export default function Page() {
                             }
                         }
                     />
-
-
                 </div>
 
                 <div className="create-meeting-page-section">
@@ -126,7 +125,6 @@ export default function Page() {
                 </div>
                 <Button
                     label="Create Event"
-                    onClick={handleCreateMeeting}
                     className="button-tertially"
                 />
             </form>

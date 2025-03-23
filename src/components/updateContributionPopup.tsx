@@ -72,6 +72,7 @@ export default function UpdateContributionPopup(props: FilterPopupProps) {
         axios.post("/api/users/getOne", { id })
             .then((response) => {
                 setUser(response.data.user);
+                setContribution({ ...contribution, amount: Number(response.data.user.monthlyContributionAmount) });
             })
             .catch((error) => {
                 console.error("Error fetching user", error);
@@ -130,6 +131,7 @@ export default function UpdateContributionPopup(props: FilterPopupProps) {
                     label="Amount"
                     options={[
                         { value: user?.monthlyContributionAmount, label: user?.monthlyContributionAmount },
+
                     ]}
                     value={contribution.amount}
                     onChange={(e) => setContribution({ ...contribution, amount: Number(e.target.value) })}

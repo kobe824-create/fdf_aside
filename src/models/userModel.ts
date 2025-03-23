@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import Otp from "./otp";
 
 
 const userSchema = new mongoose.Schema({
@@ -49,7 +50,7 @@ const userSchema = new mongoose.Schema({
     ],
     otp: {
         type: String,
-        ref: "Otp",
+        ref: Otp,
     },
     password: {
         type: String,

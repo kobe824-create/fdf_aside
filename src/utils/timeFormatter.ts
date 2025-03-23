@@ -9,7 +9,7 @@ const formatMeetingDate = (dateString: string, startTime: string, endTime: strin
 
     const formatTime = (time: string) => {
         const [hours, minutes] = time.toString().split("T")[0].split(":");
-        return new Date(2000, 0, 1, hours, minutes).toLocaleTimeString("en-US", {
+        return new Date(2000, 0, 1, parseInt(hours), parseInt(minutes)).toLocaleTimeString("en-US", {
             hour: "numeric",
             minute: "2-digit",
             hour12: true,

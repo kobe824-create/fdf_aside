@@ -8,7 +8,7 @@ export async function POST(request: NextRequest) {
         const reqBody = await request.json();
 
         const {id } = reqBody;
-        const contributions = await Contribution.find({ user: id });
+        const contributions = await Contribution.find({ user: id }).populate("penalties");
         return NextResponse.json({ contributions }, { status: 200 });
 
 

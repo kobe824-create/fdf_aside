@@ -178,7 +178,8 @@ select:focus {
 .create-meeting-form,
 .create-meeting-page-section,
 .add-attachment-input-cont,
-.otp-login-wrapper
+.otp-login-wrapper,
+.table-popup
  {
   display: flex;
   flex-direction: column;
@@ -410,6 +411,14 @@ input {
   /* height: 78px; */
 }
 
+.table h2 {
+  font-family: "Zain", sans-serif;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 40px;
+  padding: 12px 24px 0;
+}
+
 .table th,
 .table td {
   padding: 16px;
@@ -592,6 +601,7 @@ input {
   padding: 16px;
   background-color: white;
   border-radius: 12px;
+  gap: 16px;
 }
 
 /* create-meeting-form */
@@ -745,6 +755,7 @@ input {
   height: 32px;
   border: 0.67px solid #e7eae9;
   border-radius: 8px;
+  cursor: pointer;
 }
 .profile-img-container {
   width: 37px;
@@ -1228,6 +1239,13 @@ input {
 .attachment {
   gap: 12px;
   width: 100%;
+}
+.attachment p {
+  font-family: "Zain", sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 20px;
+  color: #727a90;
 }
 .attachment-infos {
   gap: 2px;

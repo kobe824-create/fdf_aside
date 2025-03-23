@@ -4,7 +4,7 @@ import Checkbox from "@/components/checkbox";
 import FormField from "@/components/formField";
 import LogoContainer from "@/components/logoContainer";
 import MarkAttendancePopup from "@/components/markAttendancePopup";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import 'react-phone-number-input/style.css'
@@ -21,6 +21,14 @@ import toast from "react-hot-toast";
 export default function Page() {
     const router = useRouter();
     const [popupDisplay, setPopupDisplay] = useState(false);
+
+    const loggedInUser = useAuth().user
+
+    useEffect(() => {
+        if (loggedInUser) {
+            router.push("/overview")
+        }
+    }, [loggedInUser, router])
 
     const [user, setUser] = useState({
         phoneNumber: "",

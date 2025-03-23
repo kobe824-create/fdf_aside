@@ -1,4 +1,5 @@
-export default function Notifications() {
+
+export default function Page() {
   return (
     <div className="notifications-page">
         <div className="notifications-page-heading">

@@ -13,6 +13,7 @@ type AuthContextType = {
 interface CachedUser {
     id: string;
     phoneNumber: string;
+    role: string;
 }
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
@@ -29,6 +30,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             const response = await axios.get("/api/auth");
             setUser(response.data.user);
         } catch (error) {
+            console.log("User not logged in", error);
             setUser(null);
         } finally {
             setLoading(false);

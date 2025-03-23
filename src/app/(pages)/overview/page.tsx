@@ -5,12 +5,10 @@ import Table from "@/components/table";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { UserTypes } from "@/utils/types";
-import { useAuth } from "@/lib/auth/authProvider";
 
 
 export default function Page() {
 
-    const {user} = useAuth();
 
 
     const [users, setUsers] = useState<UserTypes[]>([]);
@@ -24,11 +22,6 @@ export default function Page() {
                 console.log(err);
             })
     }, [])
-
-    useEffect(() => {
-        if(user) console.log(user, "user");
-    }, [user])
-
     return (
         <div className="overview-page-wrapper">
 
@@ -274,7 +267,8 @@ export default function Page() {
                             ["John Darcey", "johnd@gmail.com", "Admin", "Active"],
                             ["John Darcey", "johnd@gmail.com", "Admin", "Active"],
                         ],
-                        type: "normal"
+                        type: "normal",
+                        title: "General Overview of Members and their Shares"
                     }}
                 />
                 <Table
@@ -302,7 +296,8 @@ export default function Page() {
                             ["John Doe", "red", "green", "red", "red", "red", "green", "red", "green", "red", "red", "red", "green"],
                             ["John Doe", "red", "green", "red", "green", "red", "red", "red", "green", "green", "green", "red", "red"],
                         ],
-                        type: "colored"
+                        type: "colored",
+                        title: "General Overview of Members and their contributions"
                     }}
                 />
 

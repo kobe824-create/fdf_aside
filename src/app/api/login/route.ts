@@ -27,7 +27,7 @@ export async function POST(request: NextRequest) {
         if (!isMatch) {
             return NextResponse.json({ message: "Invalid phone number or password" }, { status: 401 })
         }
-        const cachedUser = { phoneNumber, id: user._id };
+        const cachedUser = { phoneNumber, id: user._id, role: user.role };
         const cookieStore = await cookies();
         if (rememberMe) {
             cookieStore.set("session", JSON.stringify(cachedUser), { httpOnly: true, maxAge: 60 * 60 * 24 * 7 });
@@ -36,10 +36,11 @@ export async function POST(request: NextRequest) {
         }
         return NextResponse.json({ message: "Logged in", user });
 
-    } catch (error) {
+    } catch (error: unknown) {
         console.error(error);
+        const errorMessage = error instanceof Error ? error.message : "Unknown error";
         return NextResponse.json(
-            { message: "server error", error: error.message },
+            { message: "server error", error: errorMessage },
             { status: 500 }
         );
     }

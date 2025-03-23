@@ -4,8 +4,8 @@ import Meeting from "@/models/meeting";
 import activity from "@/models/activity";
 import connect from "@/dbConfig/dbConfig";
 
-import fs, { writeFile } from "fs/promises";
-import path from "path";
+import { writeFile } from "fs/promises";
+// import path from "path";
 
 
 

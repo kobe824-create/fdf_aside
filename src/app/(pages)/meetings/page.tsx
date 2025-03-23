@@ -1,6 +1,8 @@
 "use client";
 import Button from "@/components/button";
 import Table from "@/components/table";
+import { useAuth } from "@/lib/auth/authProvider";
+import { MeetingTypes } from "@/utils/types";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -19,6 +21,8 @@ export default function Meetings() {
             })
     }, []);
 
+    const { user } = useAuth();
+
 
     return (
         <div className="meeting-page">
@@ -26,24 +30,26 @@ export default function Meetings() {
             <div className="meeting-body">
                 <h2>
                     Meetings Dashboard
-                    <Button
-                        label="Create New Metting"
-                        onClick={
-                            () => {
-                                router.push("/createMeeting")
+                    {user?.role === "admin" &&
+                        <Button
+                            label="Create New Metting"
+                            onClick={
+                                () => {
+                                    router.push("/createMeeting")
+                                }
                             }
-                        }
-                        className="button-primary"
-                    />
+                            className="button-primary"
+                        />
+                    }
                 </h2>
                 <div className="overview-tables">
                     <Table
                         data={{
-                            tableHeaders: ["Title", "Start Time", "End Time", "Location", "Action"],
-                            tableData: meetings.map((meeting: any) => [
+                            tableHeaders: ["Title", "Date", "Start Time", "Location", "Action"],
+                            tableData: meetings.map((meeting: MeetingTypes) => [
                                 meeting.title,
+                                meeting.date.split("T")[0],
                                 meeting.startTime,
-                                meeting.endTime,
                                 meeting.location,
                                 <Button
                                     key={meeting._id}

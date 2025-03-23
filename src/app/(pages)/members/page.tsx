@@ -1,11 +1,16 @@
 "use client";
 import SelectFormField from "@/components/selectFormField";
+import { useAuth } from "@/lib/auth/authProvider";
 import { UserTypes } from "@/utils/types";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 export default function Members() {
+
+  const {user} = useAuth();
+
   const router = useRouter();
 
   const [users, setUsers] = useState<UserTypes[]>([]);
@@ -14,6 +19,16 @@ export default function Members() {
   // Pagination States
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(12);
+
+  useEffect(() => {
+    if (!user) {
+      router.push("/login");
+    }
+    if (user && user.role !== "admin") {
+      toast.error("You do not have permission to access this page");
+      router.push("/overview");
+    }
+  }, [user]);
 
   useEffect(() => {
     axios.get("/api/users/get")
@@ -53,7 +68,6 @@ export default function Members() {
 
   // Change page
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
-
 
 
   return (

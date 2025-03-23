@@ -8,9 +8,12 @@ import formatMeetingDate from "@/utils/timeFormatter";
 import Button from "@/components/button";
 import AttachmentPopup from "@/components/attachmentPopup";
 import EditAttendancePopup from "@/components/editAttendancePopup";
+import { useAuth } from "@/lib/auth/authProvider";
+import { saveAs } from "file-saver";
 
 export default function Meeting() {
     const router = useRouter();
+    const { user } = useAuth();
 
     const params = useSearchParams();
     const meetingId = params.get("id");
@@ -81,19 +84,22 @@ export default function Meeting() {
         closePopup={() => {
             setPopupDisplay(false);
         }}
-        id={meetingId}
+        id={meetingId || ""}
         setUpdate={setUpdate}
     />);
 
     const deleteMeeting = async () => {
         try {
-            const res = await axios.post(`/api/meetings/delete`, {meetingId});
+            const res = await axios.post(`/api/meetings/delete`, { meetingId });
             console.log(res.data);
             router.push("/meetings");
         } catch (error) {
             console.error("Delete failed", error);
         }
     }
+    const handleDownload = (fileUrl: string, fileName: string) => {
+        saveAs(fileUrl, fileName);
+    };
 
     return (
         <div className="meeting-page">
@@ -109,11 +115,13 @@ export default function Meeting() {
             <div className="meeting-body">
                 <h2>
                     Meeting
-                    <Button
-                    label="Delete Meeting"
-                    onClick={deleteMeeting}
-                    className="button-primary"
-                    />
+                    {user?.role === "admin" && (
+                        <Button
+                            label="Delete Meeting"
+                            onClick={deleteMeeting}
+                            className="button-primary"
+                        />
+                    )}
                 </h2>
                 <div className="meeting-content">
                     <div className="meeting-side-bar">
@@ -181,7 +189,7 @@ export default function Meeting() {
                                             closePopup={() => {
                                                 setPopupDisplay(false);
                                             }}
-                                            id={meetingId}
+                                            id={meetingId || ""}
                                             setUpdate={setUpdate}
                                         />
                                         )
@@ -214,7 +222,7 @@ export default function Meeting() {
                             </div> */}
 
                             {
-                                meeting.attachments.map((attachment, index) => {
+                                meeting.attachments.length > 0 ? meeting.attachments.map((attachment, index) => {
                                     return (
                                         <div className="attachment" key={index}>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
@@ -229,7 +237,11 @@ export default function Meeting() {
 
                                                 <p>{Math.floor(attachment.size / 1000)} KB</p>
                                             </div>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none" className="download-attachment-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none" className="download-attachment-icon"
+                                                onClick={() => {
+                                                    handleDownload(attachment.url, attachment.name)
+                                                }}
+                                            >
                                                 <g clipPath="url(#clip0_220_7263)">
                                                     <path d="M6.58565 12.0813C6.77138 12.2672 6.99192 12.4146 7.23465 12.5152C7.47738 12.6158 7.73756 12.6676 8.00031 12.6676C8.26306 12.6676 8.52324 12.6158 8.76598 12.5152C9.00871 12.4146 9.22925 12.2672 9.41498 12.0813L11.5556 9.94067C11.6704 9.81373 11.732 9.64752 11.7276 9.47644C11.7232 9.30536 11.6532 9.14253 11.532 9.02165C11.4109 8.90077 11.2479 8.8311 11.0768 8.82707C10.9058 8.82304 10.7397 8.88496 10.613 9L8.66231 10.9513L8.66698 0.666667C8.66698 0.489856 8.59674 0.320286 8.47172 0.195262C8.34669 0.0702379 8.17712 0 8.00031 0V0C7.8235 0 7.65393 0.0702379 7.52891 0.195262C7.40388 0.320286 7.33365 0.489856 7.33365 0.666667L7.32765 10.9387L5.38765 9C5.26255 8.875 5.09292 8.8048 4.91608 8.80486C4.73923 8.80493 4.56965 8.87524 4.44465 9.00033C4.31964 9.12543 4.24945 9.29506 4.24951 9.4719C4.24957 9.64875 4.31989 9.81833 4.44498 9.94333L6.58565 12.0813Z" fill="#727A90" />
                                                     <path d="M15.3333 10.6665C15.1565 10.6665 14.987 10.7367 14.8619 10.8618C14.7369 10.9868 14.6667 11.1564 14.6667 11.3332V13.9998C14.6667 14.1766 14.5964 14.3462 14.4714 14.4712C14.3464 14.5963 14.1768 14.6665 14 14.6665H2C1.82319 14.6665 1.65362 14.5963 1.5286 14.4712C1.40357 14.3462 1.33333 14.1766 1.33333 13.9998V11.3332C1.33333 11.1564 1.2631 10.9868 1.13807 10.8618C1.01305 10.7367 0.843478 10.6665 0.666667 10.6665C0.489856 10.6665 0.320286 10.7367 0.195262 10.8618C0.0702379 10.9868 0 11.1564 0 11.3332L0 13.9998C0 14.5303 0.210714 15.039 0.585786 15.414C0.960859 15.7891 1.46957 15.9998 2 15.9998H14C14.5304 15.9998 15.0391 15.7891 15.4142 15.414C15.7893 15.039 16 14.5303 16 13.9998V11.3332C16 11.1564 15.9298 10.9868 15.8047 10.8618C15.6797 10.7367 15.5101 10.6665 15.3333 10.6665Z" fill="#727A90" />
@@ -241,7 +253,12 @@ export default function Meeting() {
                                                 </defs>
                                             </svg>
                                         </div>)
-                                })
+                                }) :
+                                    <div className="attachment">
+                                        <p>
+                                            No attachments have been added
+                                        </p>
+                                    </div>
                             }
 
                         </div>
@@ -334,33 +351,39 @@ export default function Meeting() {
 
                     <Table
                         data={{
-                            tableHeaders: ["Name", "Status", "CheckIn time", "Keys", "Actions"],
+                            tableHeaders: user?.role === "admin" ? ["Name", "Status", "CheckIn time", "Keys", "Actions"] : ["Name", "Status", "CheckIn time"],
                             tableData: meeting.attendances.map((attendance) => {
-                                return [
-                                    attendance.user.firstname + " " + attendance.user.lastname,
-                                    attendance.status,
-                                    attendance.checkIn ? formatMeetingDate(attendance.checkIn.toString().split("T")[0], attendance.checkIn.toString().split("T")[1], null) : "Not checked in",
-                                    attendance.key,
-                                    <Button
-                                        key={attendance._id}
-                                        label="Edit Status"
-                                        className="button-primary"
-                                        onClick={() => {
-                                            setPopupDisplay(true);
-                                            setPopup(
-                                                <EditAttendancePopup
-                                                    closePopup={() => {
-                                                        setPopupDisplay(false);
-                                                    }}
-                                                    attendanceId={attendance._id}
-                                                    setUpdate={setUpdate}
-                                                />
-                                            )
-                                        }}
-                                    />
-                                ]
+                                return user?.role === "admin" ?
+                                    [
+                                        attendance.user.firstname + " " + attendance.user.lastname,
+                                        attendance.status,
+                                        attendance.checkIn ? formatMeetingDate(attendance.checkIn.toString().split("T")[0], attendance.checkIn.toString().split("T")[1], null) : "Not checked in",
+                                        attendance.key,
+                                        <Button
+                                            key={attendance._id}
+                                            label="Edit Status"
+                                            className="button-primary"
+                                            onClick={() => {
+                                                setPopupDisplay(true);
+                                                setPopup(
+                                                    <EditAttendancePopup
+                                                        closePopup={() => {
+                                                            setPopupDisplay(false);
+                                                        }}
+                                                        attendanceId={attendance._id}
+                                                        setUpdate={setUpdate}
+                                                    />
+                                                )
+                                            }}
+                                        />
+                                    ] : [
+                                        attendance.user.firstname + " " + attendance.user.lastname,
+                                        attendance.status,
+                                        attendance.checkIn ? formatMeetingDate(attendance.checkIn.toString().split("T")[0], attendance.checkIn.toString().split("T")[1], null) : "Not checked in",
+                                    ]
                             }),
-                            type: "normal"
+
+                            type: "normal",
                         }}
                     />
                 </div>

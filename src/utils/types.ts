@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export interface UserTypes {
     _id?: string;
     firstname: string;
@@ -21,7 +23,7 @@ export interface ContributionTypes {
     user: string;
     date: string;
     status: string;
-    penalties?: string[];
+    penalties?: string[] | PenaltyTypes[];
     createdAt: string;
     updatedAt: string;
     __v?: number;
@@ -36,4 +38,47 @@ export interface OtpTypes {
     createdAt: string;
     updatedAt: string;
     __v?: number;
+}
+export interface AttachmentTypes {
+    _id?: string;
+    name: string;
+    url: string;
+    size: number;
+    meeting: string;
+    createdAt: string;
+    updatedAt: string;
+    __v?: number;
+}
+
+export interface MeetingTypes {
+    _id?: string;
+    title: string;
+    date: string;
+    startTime: string;
+    endTime: string;
+    location: string;
+    description: string;
+    attachments: AttachmentTypes[];
+    createdAt: string;
+    updatedAt: string;
+    __v?: number;
+}
+
+export interface PenaltyTypes  {
+    _id?: string;
+    amount: number;
+    reason: string;
+    user: string;
+    date: string;
+    createdAt: string;
+    updatedAt: string;
+    __v?: number;
+}
+
+
+export interface TableProps {
+    tableHeaders: string[];
+    tableData: (string | ReactNode)[][];
+    type?: string;
+    title ?: string;
 }
