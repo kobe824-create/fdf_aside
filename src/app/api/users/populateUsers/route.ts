@@ -22,7 +22,7 @@ export async function GET() {
     } catch (error) {
         console.error(error);
         return NextResponse.json(
-            { message: "Failed to update users", error: error.message },
+            { message: "Failed to update users", error: error instanceof Error ? error.message : "Unknown error" },
             { status: 500 }
         );
     }

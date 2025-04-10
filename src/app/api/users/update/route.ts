@@ -1,7 +1,7 @@
 import { NextResponse, NextRequest } from "next/server";
 import User from "@/models/userModel";
 import connect from "@/dbConfig/dbConfig";
-import fs, { writeFile } from "fs/promises";
+import { writeFile } from "fs/promises";
 // import path from "path";
 
 
