@@ -57,11 +57,11 @@ export default function FilterPopup(props: FilterPopupProps) {
         />
       </fieldset>
       <div className="parallel-btn">
-        {/* <Button
+        <Button
           label="Cancel"
           onClick={closePopup}
           className="button-secondary"
-        /> */}
+        />
         <Button
           label="Filter"
           onClick={() => { }}

@@ -127,7 +127,7 @@ export default function Table(props: { data: TableProps }) {
                                     <td>{index + 1 + ((currentPage - 1) * itemsPerPage)}</td>
                                     {
                                         row.map((cell, idex) => {
-                                            return data.type === 'normal' ? ["present", "absent", "absent excused", "late", "very late", "excused", "paid", "unpaid"].includes(cell) ?
+                                            return data.type === 'normal' ? ["present", "absent", "absent excused", "late", "very late", "excused", "paid", "unpaid"].includes(String(cell)) ?
                                                 (<td key={idex}>
                                                     <p className={`cont-${cell}`}>
                                                         {cell}
