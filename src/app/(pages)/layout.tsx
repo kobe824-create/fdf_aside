@@ -75,7 +75,7 @@ export default function TabsLayout({
 
         },
         {
-            name: "My Account",
+            name: "Account",
             svg: myAccountSVG,
             status: "",
             path: "myAccount"
@@ -94,7 +94,7 @@ export default function TabsLayout({
             path: "meetings"
         },
         {
-            name: "Code of Conduct",
+            name: "C/code",
             svg: codeOfConductSVG,
             status: "",
             path: "codeOfConduct"
@@ -225,13 +225,45 @@ export default function TabsLayout({
                             <img src={member?.image_url} alt="profile" />
                         </div>
                         <div className="member-name-role">
-                            <h3>{member?.firstname} {" "} {member?.lastname}
+                            {/* <h3>{member?.firstname} {" "} {member?.lastname}
                                 <i className="fa-solid fa-angle-down"></i>
-                            </h3>
+                            </h3> */}
                             <p>{member?.role}</p>
                         </div>
                     </div>
                 </div>
+
+                <div className="navlinks-container-responsive">
+                    {
+                        navlinkStates.map((navlink, index) => {
+                            if(user?.role === "member" && navlink.name === "Members") {
+                                return null;
+                            }
+                            return (
+                                <div
+                                    className={`navlink ${navlink.status}`} key={index}
+                                    onClick={() => {
+                                        setNavlinkstates(navlinkStates.map((navlink, i) => {
+                                            if (i === index) {
+                                                return { ...navlink, status: "active" }
+                                            } else {
+                                                return { ...navlink, status: "" }
+                                            }
+                                        }))
+                                    }
+                                    }>
+                                    <div className="navlink-img-cont">
+                                        {navlink.svg}
+                                    </div>
+                                    <p>
+                                        {navlink.name}
+                                    </p>
+                                </div>
+                            )
+                        })
+                    } 
+                </div>
+
                 <div className="child-container">
                     {children}
                 </div>

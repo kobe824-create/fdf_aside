@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 * {
   margin: 0;
   padding: 0;
@@ -119,7 +118,8 @@ select:focus {
 .added-attachments,
 .atttendance-status-container,
 .attendance-status,
-.attendance-chekbox  {
+.attendance-chekbox,
+.navlinks-container-responsive {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -179,8 +179,7 @@ select:focus {
 .create-meeting-page-section,
 .add-attachment-input-cont,
 .otp-login-wrapper,
-.table-popup
- {
+.table-popup {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -320,15 +319,18 @@ input {
   background: linear-gradient(135deg, #14add6 0%, #384295 100%);
 }
 
-.button.button-tertially:hover, .button.button-tertially.disabled {
+.button.button-tertially:hover,
+.button.button-tertially.disabled {
   background: linear-gradient(135deg, #14add6 0%, #384295 100%);
   opacity: 0.8;
 }
 
-.button.button-primary:hover, .button.button-primary.disabled {
+.button.button-primary:hover,
+.button.button-primary.disabled {
   background-color: #ff9501a7;
 }
-.button.button-secondary:hover, .button.button-secondary.disabled {
+.button.button-secondary:hover,
+.button.button-secondary.disabled {
   background-color: #2395f2a7;
 }
 
@@ -409,6 +411,10 @@ input {
 .table tr {
   border-bottom: 1px solid #e9eaea;
   /* height: 78px; */
+  cursor: pointer;
+}
+.table tr:hover {
+  background-color: #f5f5f5;
 }
 
 .table h2 {
@@ -421,7 +427,7 @@ input {
 
 .table th,
 .table td {
-  padding: 16px;
+  padding: 12px;
 }
 .search-input {
   border: 1px solid #e9eaea;
@@ -430,7 +436,22 @@ input {
   border-radius: 12px;
   width: 320px;
   height: 40px;
+  max-width: 100%;
 }
+
+.overview-page-body-right-side .table-heading {
+  display: none;
+}
+.overview-page-body-right-side .table-bottom > p {
+  display: none;
+}
+.overview-page-body-right-side .table-bottom {
+  justify-content: center;
+}
+.overview-page-body-right-side .table {
+  height: 100%;
+}
+
 .search-input input {
   border: none;
   outline: none;
@@ -602,6 +623,7 @@ input {
   background-color: white;
   border-radius: 12px;
   gap: 16px;
+  max-width: 100%;
 }
 
 /* create-meeting-form */
@@ -675,6 +697,12 @@ input {
   width: 100%;
   padding: 24px;
 }
+.navlinks-container-responsive {
+  width: 100%;
+  padding: 12px;
+  gap: 8px;
+  display: none;
+}
 .navlink p {
   font-family: "Zain", sans-serif;
   font-weight: 300;
@@ -686,21 +714,55 @@ input {
   font-weight: 700;
   color: #ffffff;
 }
+
+.navlinks-container-responsive .navlink p {
+  font-family: "Zain", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+}
+.navlinks-container-responsive .navlink {
+  padding: 8px;
+  gap: 8px;
+  height: 45px;
+  justify-content: center;
+  border-radius: 12px;
+  background-color: #f5f5f5;
+}
+.navlinks-container-responsive .navlink-img-cont {
+  width: 28px;
+  height: 28px;
+  border-radius: 50px;
+  background-color: var(--primary-icon-color);
+}
+.navlinks-container-responsive .navlink-img-cont svg {
+  width: 16px;
+  height: 16px;
+}
+
+.navlinks-container-responsive .navlink.active, .navlinks-container-responsive .navlink:hover {
+  background-color: var(--primary-btn-color);
+  border-radius: 12px;
+}
+.navlinks-container-responsive .navlink.active p {
+  font-weight: 700;
+  color: #ffffff;
+}
+
 .navlink.active .navlink-img-cont,
 .navlink:hover .navlink-img-cont {
   background-color: transparent;
   width: auto;
   height: auto;
 }
-.navlink img {
-  height: 100%;
-}
+
 .navlink-img-cont {
   width: 50px;
   height: 50px;
   border-radius: 50px;
   background-color: var(--primary-icon-color);
 }
+
 .navlink-img-cont img {
   width: 16px;
   height: 16px;
@@ -819,11 +881,11 @@ input {
   width: 100%;
 }
 .overview-page-body-right-side {
-  width: 280px;
+  /* width: 280px; */
   gap: 16px;
-  padding: 16px;
+  /* padding: 16px; */
   align-items: flex-start;
-  border: 1px solid #00000033;
+  /* border: 1px solid #00000033; */
   border-radius: 20px;
 }
 .financial-cards-wrapper {
@@ -836,7 +898,7 @@ input {
 }
 .middle-cont {
   width: 100%;
-  height: 460px;
+  height: 100%;
   background-color: #f7f9fb;
   justify-content: start;
   padding: 24px;
@@ -1014,6 +1076,7 @@ input {
   width: 100%;
   height: 100vh;
   background-color: #00000033;
+  padding: 12px;
 }
 
 /* code of conduct */
@@ -1040,7 +1103,7 @@ input {
   width: 100%;
   height: 100%;
   gap: 24px;
-  border-right: 1px solid #00000033;
+  /* border-right: 1px solid #00000033; */
   padding: 12px;
 }
 
@@ -1066,7 +1129,7 @@ input {
   color: #ffffff;
   cursor: pointer;
   gap: 16px;
-  height: 36px;
+  height: 42px;
 }
 .my-account-heading .edit-btn {
   background-color: #1c1d22;
@@ -1190,7 +1253,7 @@ input {
   max-width: 180px;
 }
 .meeting-side-bar {
-  min-width: 324px;
+  width: 324px;
   gap: 24px;
 }
 .meeting-side-bar-top {
@@ -1512,6 +1575,10 @@ input {
 }
 .members-table tr {
   border-bottom: 0.5px solid #d0d0d0;
+  cursor: pointer;
+}
+.members-table tr:hover {
+  background-color: #f7f9fb;
 }
 .members-table td {
   font-family: "Nunito", sans-serif;
@@ -1533,7 +1600,7 @@ input {
 .add-member-page {
   width: 100%;
   gap: 32px;
-  padding: 24px;
+  /* padding: 24px; */
 }
 .add-member-body {
   gap: 16px;
@@ -1542,11 +1609,12 @@ input {
 }
 .add-member-left-side {
   gap: 16px;
-  min-width: 406px;
+  width: 406px;
   height: 456px;
   border: 1px solid #e8e8e8;
   border-radius: 20px;
   align-items: center;
+  padding: 24px;
 }
 .add-member-left-side button {
   height: 30px;
@@ -1610,12 +1678,14 @@ input {
   width: 100%;
 }
 
-.cont-paid, .cont-present {
+.cont-paid,
+.cont-present {
   background-color: #e6f4f5;
   border: 1px solid #b0dedf;
   color: #009499;
 }
-.cont-unpaid, .cont-absent{
+.cont-unpaid,
+.cont-absent {
   border: 1px solid #facdc3;
   background-color: #feefec;
   color: #f05d3d;
@@ -1703,7 +1773,7 @@ input {
   display: none;
 }
 .attendance-chekbox.checked {
-  background-color: #FF9501;
+  background-color: #ff9501;
 }
 .attendance-chekbox.checked svg {
   display: block;
@@ -1771,5 +1841,200 @@ input {
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+/* responsiveness */
+/* Large screens (Desktops & Laptops) */
+@media (max-width: 1200px) {
+  /* Styles for desktops and large screens */
+
+  .side-bar {
+    display: none;
+  }
+  .navlinks-container-responsive{
+    display: flex;
+  }
+}
+
+/* Medium screens (Tablets & Small Laptops) */
+@media (max-width: 1024px) {
+  /* Styles for tablets and small laptops */
+  /*overview page*/
+  .financial-cards-wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .overview-page-body {
+    gap: 16px;
+  }
+
+  .allmembers {
+    height: 760px;
+  }
+
+  .members-page-heading {
+    flex-wrap: wrap;
+  }
+}
+
+/* Small screens (Mobile Phones) */
+@media (max-width: 768px) {
+  /* Styles for mobile devices */
+  .overview-middle-containers {
+    flex-wrap: wrap;
+  }
+  .allmembers {
+    height: 1230px;
+  }
+  .table .search-input {
+    width: 100%;
+  }
+  .table tr td,
+  .table tr th,
+  .members-table tr td,
+  .members-table tr th {
+    padding: 8px;
+  }
+  .table tr th,
+  .members-table tr th {
+    font-size: 12px;
+  }
+  .table tr td,
+  .members-table tr td {
+    font-size: 12px;
+  }
+  .members-page-heading {
+    flex-direction: column;
+    align-items: start;
+  }
+}
+@media (max-width: 768px) {
+  .my-account-bottom-container {
+    flex-wrap: wrap;
+  }
+  .add-member-body {
+    flex-wrap: wrap;
+  }
+  .add-member-left-side {
+    width: 100%;
+    height: auto;
+  }
+  .add-member-inputs .parallel-fields {
+    gap: 16px;
+    grid-template-columns: 1fr 1fr;
+  }
+  .code-of-conduct-conytainer {
+    padding: 12px;
+    gap: 16px;
+  }
+}
+
+@media (max-width: 680px) {
+  .big-table {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  /* .overview-middle-containers {
+    flex-wrap: wrap;
+  }
+  .allmembers {
+    height: 1230px;
+  } */
+  .overview-page-body {
+    flex-wrap: wrap;
+  }
+  .allmembers {
+    height: 570px;
+  }
+  .overview-page-body-right-side {
+    width: 100%;
+  }
+
+  .member-name-role h3 {
+    font-size: 14px;
+    line-height: 20px;
+  }
+  .wlcm-msg {
+    font-size: 16px;
+    line-height: 20px;
+  }
+  .wlcm-msg span {
+    font-size: 16px;
+    line-height: 20px;
+  }
+
+  .my-account-top-container {
+    gap: 16px;
+  }
+  .meeting-content {
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .meeting-side-bar {
+    width: 100%;
+  }
+
+  .code-of-conduct-conytainer {
+    flex-wrap: wrap;
+  }
+  .code-of-conduct-conytainer p {
+    padding: 0;
+  }
+}
+
+@media (max-width: 540px) {
+  .navlinks-container-responsive .navlink-img-cont {
+    display: none;
+  }
+}
+
+@media (max-width: 500px) {
+  .my-account-top-container {
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .my-account-prersonalised {
+    width: 100%;
+    align-items: center;
+    padding: 0;
+  }
+  .member-contacts {
+    width: 100%;
+  }
+  .member-contacts p {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .table tr th,
+  .members-table tr th {
+    font-size: 10px;
+  }
+  .table tr td,
+  .members-table tr td {
+    font-size: 10px;
+  }
+  .my-account-heading button {
+    width: 100%;
+    /* padding: 10px */
+  }
+  .my-account-heading {
+    gap: 12px;
+    padding: 8px;
+  }
+
+  .add-member-inputs .parallel-fields {
+    gap: 12px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+@media (max-width: 360px) {
+  .table tr td,
+  .members-table tr td {
+    font-size: 8px;
   }
 }

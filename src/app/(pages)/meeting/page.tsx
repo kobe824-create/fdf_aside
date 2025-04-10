@@ -351,39 +351,34 @@ export default function Meeting() {
 
                     <Table
                         data={{
-                            tableHeaders: user?.role === "admin" ? ["Name", "Status", "CheckIn time", "Keys", "Actions"] : ["Name", "Status", "CheckIn time"],
+                            tableHeaders: user?.role === "admin" ? ["Name", "Status", "Keys"] : ["Name", "Status"],
                             tableData: meeting.attendances.map((attendance) => {
                                 return user?.role === "admin" ?
                                     [
                                         attendance.user.firstname + " " + attendance.user.lastname,
                                         attendance.status,
-                                        attendance.checkIn ? formatMeetingDate(attendance.checkIn.toString().split("T")[0], attendance.checkIn.toString().split("T")[1], null) : "Not checked in",
-                                        attendance.key,
-                                        <Button
-                                            key={attendance._id}
-                                            label="Edit Status"
-                                            className="button-primary"
-                                            onClick={() => {
-                                                setPopupDisplay(true);
-                                                setPopup(
-                                                    <EditAttendancePopup
-                                                        closePopup={() => {
-                                                            setPopupDisplay(false);
-                                                        }}
-                                                        attendanceId={attendance._id}
-                                                        setUpdate={setUpdate}
-                                                    />
-                                                )
-                                            }}
-                                        />
+                                        attendance.key.slice(0,6),
                                     ] : [
                                         attendance.user.firstname + " " + attendance.user.lastname,
-                                        attendance.status,
-                                        attendance.checkIn ? formatMeetingDate(attendance.checkIn.toString().split("T")[0], attendance.checkIn.toString().split("T")[1], null) : "Not checked in",
+                                        attendance.status
                                     ]
                             }),
-
                             type: "normal",
+                            onRowClick: (row) => {
+                                if (user?.role === "admin") {
+                                    setPopupDisplay(true);
+                                    setPopup(
+                                        <EditAttendancePopup
+                                            closePopup={() => {
+                                                setPopupDisplay(false);
+                                            }}
+                                            attendanceId={meeting.attendances[row]._id}
+                                            setUpdate={setUpdate}
+                                        />
+                                    )
+                                }
+                            }
+
                         }}
                     />
                 </div>

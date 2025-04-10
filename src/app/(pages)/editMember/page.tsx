@@ -93,7 +93,9 @@ export default function EditMember() {
         formData.append("identification", user.identification);
         formData.append("gender", user.gender);
         if (files.length > 0 && files[0].preview !== user.image_url) {
-            formData.append("image_url", files[0].file);
+            if (files[0].file) {
+                formData.append("image_url", files[0].file);
+            }
         } else if (files.length === 0) {
             formData.append("imgDelete", "true")
         }

@@ -81,4 +81,8 @@ export interface TableProps {
     tableData: (string | ReactNode)[][];
     type?: string;
     title ?: string;
+    searchWords?: string[];
+    filters?: string[];
+    onFilterChange?: (filter: string) => void;
+    onRowClick?: (idex: number) => void;
 }

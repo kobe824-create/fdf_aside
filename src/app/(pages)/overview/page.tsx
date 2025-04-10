@@ -236,24 +236,34 @@ export default function Page() {
                     </div>
                 </div>
                 <div className="overview-page-body-right-side">
-                    <h3>{users.length} Member{users.length > 1 ? "s" : ""}</h3>
-                    <div className="allmembers">
+
+                    {/* <h3>{users.length} Member{users.length > 1 ? "s" : ""}</h3> */}
+                    {/* <div className="allmembers"> */}
                         {
-                            users.map((user, index) => {
-                                return (
-                                    <div className="member-prof" key={index}>
-                                        <div className="member-img-cont">
-                                            <img src={user.image_url} alt="member" />
-                                        </div>
-                                        {/* <p>{user.firstname + " " + user.lastname}</p> */}
-                                        <p>{user.lastname}</p>
-                                    </div>
-                                );
-                            })
+                            // users.map((user, index) => {
+                            //     return (
+                            //         <div className="member-prof" key={index}>
+                            //             <div className="member-img-cont">
+                            //                 <img src={user.image_url} alt="member" />
+                            //             </div>
+                            //             {/* <p>{user.firstname + " " + user.lastname}</p> */}
+                            //             <p>{user.lastname}</p>
+                            //         </div>
+                            //     );
+                            // })
                         }
+                    {/* </div> */}
 
-
-                    </div>
+                    <Table
+                        data={{
+                            tableHeaders: ["Name"],
+                            tableData: users.map((user) => [user.lastname]),
+                            type: "normal",
+                            title: `${users.length} Members`
+                        }}
+                            
+                    />
+                    
                 </div>
             </div>
             <div className="overview-tables">
@@ -271,33 +281,37 @@ export default function Page() {
                         title: "General Overview of Members and their Shares"
                     }}
                 />
+
                 <Table
                     data={{
-                        tableHeaders: ["Name", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                        tableHeaders: ["Name", "Jan", "Feb", "Mar", "Apr", "May", "Jun"],
                         tableData: [
-                            ["John Doe", "red", "green", "red", "red", "red", "green", "red", "red", "green", "green", "red", "red"],
-                            ["John Doe", "red", "green", "red", "red", "red", "red", "red", "red", "green", "red", "red", "green"],
-                            ["John Doe", "red", "green", "red", "red", "red", "green", "red", "red", "green", "green", "red", "red"],
-                            ["John Doe", "red", "green", "red", "red", "red", "green", "red", "green", "red", "red", "red", "green"],
-                            ["John Doe", "red", "green", "red", "green", "red", "red", "red", "green", "green", "green", "red", "red"],
-                            ["John Doe", "red", "green", "red", "red", "red", "green", "red", "red", "green", "green", "red", "red"],
-                            ["John Doe", "red", "green", "red", "red", "red", "red", "red", "red", "green", "red", "red", "green"],
-                            ["John Doe", "red", "green", "red", "red", "red", "green", "red", "red", "green", "green", "red", "red"],
-                            ["John Doe", "red", "green", "red", "red", "red", "green", "red", "green", "red", "red", "red", "green"],
-                            ["John Doe", "red", "green", "red", "green", "red", "red", "red", "green", "green", "green", "red", "red"],
-                            ["John Doe", "red", "green", "red", "red", "red", "green", "red", "red", "green", "green", "red", "red"],
-                            ["John Doe", "red", "green", "red", "red", "red", "red", "red", "red", "green", "red", "red", "green"],
-                            ["John Doe", "red", "green", "red", "red", "red", "green", "red", "red", "green", "green", "red", "red"],
-                            ["John Doe", "red", "green", "red", "red", "red", "green", "red", "green", "red", "red", "red", "green"],
-                            ["John Doe", "red", "green", "red", "green", "red", "red", "red", "green", "green", "green", "red", "red"],
-                            ["John Doe", "red", "green", "red", "red", "red", "green", "red", "red", "green", "green", "red", "red"],
-                            ["John Doe", "red", "green", "red", "red", "red", "red", "red", "red", "green", "red", "red", "green"],
-                            ["John Doe", "red", "green", "red", "red", "red", "green", "red", "red", "green", "green", "red", "red"],
-                            ["John Doe", "red", "green", "red", "red", "red", "green", "red", "green", "red", "red", "red", "green"],
-                            ["John Doe", "red", "green", "red", "green", "red", "red", "red", "green", "green", "green", "red", "red"],
+                            ["John Doe", "red", "green", "red", "red", "red", "green"],
+                            ["John Doe", "red", "green", "red", "red", "red", "red"],
+                            ["John Doe", "red", "green", "red", "red", "red", "green"],
+                            ["John Doe", "red", "green", "red", "red", "red", "green"],
+                            ["John Doe", "red", "green", "red", "green", "red", "red"],
+                            ["John Doe", "red", "green", "red", "red", "red", "green"],
+                            ["John Doe", "red", "green", "red", "red", "red", "red"],
+                            ["John Doe", "red", "green", "red", "red", "red", "green"],
+                            ["John Doe", "red", "green", "red", "red", "red", "green"],
+                            ["John Doe", "red", "green", "red", "green", "red", "red"],
+                            ["John Doe", "red", "green", "red", "red", "red", "green"],
+                            ["John Doe", "red", "green", "red", "red", "red", "red"],
+                            ["John Doe", "red", "green", "red", "red", "red", "green"],
+                            ["John Doe", "red", "green", "red", "red", "red", "green"],
+                            ["John Doe", "red", "green", "red", "green", "red", "red"],
+                            ["John Doe", "red", "green", "red", "red", "red", "green"],
+                            ["John Doe", "red", "green", "red", "red", "red", "red"],
+                            ["John Doe", "red", "green", "red", "red", "red", "green"],
+                            ["John Doe", "red", "green", "red", "red", "red", "green"],
+                            ["John Doe", "red", "green", "red", "green", "red", "red"],
                         ],
                         type: "colored",
-                        title: "General Overview of Members and their contributions"
+                        title: "Last 6 Months Contribution Overview",
+                        searchWords: [
+                            "Names"
+                        ]
                     }}
                 />
 

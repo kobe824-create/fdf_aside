@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 
 export default function Meetings() {
     const router = useRouter();
-    const [meetings, setMeetings] = useState([]);
+    const [meetings, setMeetings] = useState<MeetingTypes[]>([]);
 
     useEffect(() => {
         axios.get("/api/meetings/get")
@@ -45,20 +45,16 @@ export default function Meetings() {
                 <div className="overview-tables">
                     <Table
                         data={{
-                            tableHeaders: ["Title", "Date", "Start Time", "Location", "Action"],
+                            tableHeaders: ["Title", "Date", "Start Time", "Location"],
                             tableData: meetings.map((meeting: MeetingTypes) => [
                                 meeting.title,
                                 meeting.date.split("T")[0],
                                 meeting.startTime,
                                 meeting.location,
-                                <Button
-                                    key={meeting._id}
-                                    label="View"
-                                    onClick={() => router.push(`/meeting/?id=${meeting._id}`)}
-                                    className="button-tertially"
-                                />
                             ]),
-                            type: "normal"
+                            type: "normal",
+                            searchWords: ["title", "date", "location"],
+                            onRowClick: (idex) => router.push(`/meeting/?id=${meetings[idex]._id}`)
                         }}
                     />
                 </div>

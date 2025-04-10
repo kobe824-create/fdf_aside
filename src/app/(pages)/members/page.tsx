@@ -9,7 +9,7 @@ import toast from "react-hot-toast";
 
 export default function Members() {
 
-  const {user} = useAuth();
+  const { user } = useAuth();
 
   const router = useRouter();
 
@@ -72,6 +72,7 @@ export default function Members() {
 
   return (
     <div className="members-page">
+
       <div className="members-page-heading">
         <div className="member-search">
           <label>Quick search a member</label>
@@ -88,10 +89,12 @@ export default function Members() {
             />
           </div>
         </div>
+
         <div className="totalMember">
           <h3>{users.length}</h3>
           <p>Total number of member</p>
         </div>
+
         <div className="member-filter-cont">
           <SelectFormField
             label="Filter by"
@@ -106,14 +109,17 @@ export default function Members() {
           />
         </div>
 
-
-
         <button className="tertially-btn"
           onClick={() => {
             router.push("/addMember");
           }}
         >Add New Member</button>
+
       </div>
+
+
+
+
       <div className="members-table-container">
         <div className="members-table-heading">
           <h3>All Members</h3>
@@ -129,12 +135,11 @@ export default function Members() {
               <th>S/N</th>
               <th>Firstname</th>
               <th>Lastname</th>
-              <th>Gender</th>
-              <th>Member ID</th>
-              <th>Phone Number</th>
+              <th className="big-table">Gender</th>
+              <th className="big-table">Member ID</th>
+              <th className="big-table">Phone Number</th>
               <th>Role</th>
-              <th>Monthly Contribution</th>
-              <th>Action</th>
+              <th>Monthly Cont.</th>
             </tr>
           </thead>
           <tbody>
@@ -142,20 +147,19 @@ export default function Members() {
             {
               currentUsers.map((user, index) => {
                 return (
-                  <tr key={index}>
+                  <tr key={index}
+                    onClick={() => {
+                      router.push(`/member/?id=${user._id}`);
+                    }}
+                  >
                     <td>{index + 1 + ((currentPage - 1) * itemsPerPage)}</td>
                     <td>{user.firstname}</td>
                     <td>{user.lastname}</td>
-                    <td>{user.gender}</td>
-                    <td>{user.identification}</td>
-                    <td>{user.phoneNumber}</td>
+                    <td className="big-table">{user.gender}</td>
+                    <td className="big-table">{user.identification}</td>
+                    <td className="big-table">{user.phoneNumber}</td>
                     <td>{user.role}</td>
                     <td>{user.monthlyContributionAmount}</td>
-                    <td
-                      onClick={() => {
-                        router.push(`/member/?id=${user._id}`);
-                      }}
-                    >ViewMore</td>
                   </tr>
                 )
               })
