@@ -1869,6 +1869,9 @@ input {
   .fixed-layer {
     left: 0;
   }
+  .child-container {
+    padding-top: 140px;
+  }
   .navlinks-container-responsive{
     display: flex;
   }
