@@ -103,7 +103,14 @@ export default function MyAccount() {
         saveAs(fileUrl, fileName);
     };
 
-
+    if (!member) {
+        return (
+            <div className="loading">
+                <p>Loading...</p>
+            </div>
+        )
+    }
+    
     return (
         <div className="my-account-page">
             <div className="popup-background"
