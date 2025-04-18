@@ -5,6 +5,7 @@ import Table from "@/components/table";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { UserTypes } from "@/utils/types";
+import RotatingWheelLoader from "@/components/rotatingWheel";
 
 
 export default function Page() {
@@ -25,7 +26,9 @@ export default function Page() {
 
     if (!users) {
         return (
-            <div>loading...</div>
+            <div className="loading-wheel">
+                <RotatingWheelLoader />
+            </div>
         )
     }
     return (
@@ -101,25 +104,7 @@ export default function Page() {
                                 <h4>Member present</h4>
                                 <div className="member-present">
                                     <div className="member-img-cont">
-                                    <img src="/images/profilePic/unknown.png" alt="member" />
-                                    </div>
-                                    <div className="member-name-chechin-time">
-                                        <h5>Benjamin Joel</h5>
-                                        <p>Just now</p>
-                                    </div>
-                                </div>
-                                <div className="member-present">
-                                    <div className="member-img-cont">
-                                    <img src="/images/profilePic/unknown.png" alt="member" />
-                                    </div>
-                                    <div className="member-name-chechin-time">
-                                        <h5>Benjamin Joel</h5>
-                                        <p>Just now</p>
-                                    </div>
-                                </div>
-                                <div className="member-present">
-                                    <div className="member-img-cont">
-                                    <img src="/images/profilePic/unknown.png" alt="member" />
+                                        <img src="/images/profilePic/unknown.png" alt="member" />
                                     </div>
                                     <div className="member-name-chechin-time">
                                         <h5>Benjamin Joel</h5>
@@ -137,7 +122,25 @@ export default function Page() {
                                 </div>
                                 <div className="member-present">
                                     <div className="member-img-cont">
-                                    <img src="/images/profilePic/unknown.png" alt="member" />
+                                        <img src="/images/profilePic/unknown.png" alt="member" />
+                                    </div>
+                                    <div className="member-name-chechin-time">
+                                        <h5>Benjamin Joel</h5>
+                                        <p>Just now</p>
+                                    </div>
+                                </div>
+                                <div className="member-present">
+                                    <div className="member-img-cont">
+                                        <img src="/images/profilePic/unknown.png" alt="member" />
+                                    </div>
+                                    <div className="member-name-chechin-time">
+                                        <h5>Benjamin Joel</h5>
+                                        <p>Just now</p>
+                                    </div>
+                                </div>
+                                <div className="member-present">
+                                    <div className="member-img-cont">
+                                        <img src="/images/profilePic/unknown.png" alt="member" />
                                     </div>
                                     <div className="member-name-chechin-time">
                                         <h5>Benjamin Joel</h5>
@@ -245,19 +248,19 @@ export default function Page() {
 
                     {/* <h3>{users.length} Member{users.length > 1 ? "s" : ""}</h3> */}
                     {/* <div className="allmembers"> */}
-                        {
-                            // users.map((user, index) => {
-                            //     return (
-                            //         <div className="member-prof" key={index}>
-                            //             <div className="member-img-cont">
-                            //                 <img src={user.image_url} alt="member" />
-                            //             </div>
-                            //             {/* <p>{user.firstname + " " + user.lastname}</p> */}
-                            //             <p>{user.lastname}</p>
-                            //         </div>
-                            //     );
-                            // })
-                        }
+                    {
+                        // users.map((user, index) => {
+                        //     return (
+                        //         <div className="member-prof" key={index}>
+                        //             <div className="member-img-cont">
+                        //                 <img src={user.image_url} alt="member" />
+                        //             </div>
+                        //             {/* <p>{user.firstname + " " + user.lastname}</p> */}
+                        //             <p>{user.lastname}</p>
+                        //         </div>
+                        //     );
+                        // })
+                    }
                     {/* </div> */}
 
                     <Table
@@ -267,9 +270,9 @@ export default function Page() {
                             type: "normal",
                             title: `${users.length} Members`
                         }}
-                            
+
                     />
-                    
+
                 </div>
             </div>
             <div className="overview-tables">

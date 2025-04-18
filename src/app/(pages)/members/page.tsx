@@ -1,4 +1,5 @@
 "use client";
+import RotatingWheelLoader from "@/components/rotatingWheel";
 import SelectFormField from "@/components/selectFormField";
 import { useAuth } from "@/lib/auth/authProvider";
 import { UserTypes } from "@/utils/types";
@@ -73,7 +74,9 @@ export default function Members() {
 
   if (!users) {
     return (
-      <div> loading </div>
+      <div className="loading-wheel">
+      <RotatingWheelLoader />
+  </div>
     )
   }
 

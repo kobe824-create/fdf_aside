@@ -1,5 +1,6 @@
 "use client";
 import Button from "@/components/button";
+import RotatingWheelLoader from "@/components/rotatingWheel";
 import Table from "@/components/table";
 import { useAuth } from "@/lib/auth/authProvider";
 import { MeetingTypes } from "@/utils/types";
@@ -31,10 +32,8 @@ export default function Meetings() {
 
     if (!meetings) {
         return (
-            <div className="meeting-page">
-                <div className="meeting-body">
-                    <h2>Loading...</h2>
-                </div>
+            <div className="loading-wheel">
+                <RotatingWheelLoader />
             </div>
         )
     }

@@ -11,6 +11,7 @@ import SharePopup from "@/components/sharePopup";
 import formatMeetingDate from "@/utils/timeFormatter";
 import { useAuth } from "@/lib/auth/authProvider";
 import { saveAs } from "file-saver";
+import RotatingWheelLoader from "@/components/rotatingWheel";
 
 export default function Member() {
     const router = useRouter();
@@ -26,7 +27,7 @@ export default function Member() {
     const [updateData, setUpdateData] = useState(0);
     const [totalContributions, setTotalContributions] = useState(0);
     const [totalPendingContributions, setTotalPendingContributions] = useState(0);
-    const [meetingAttachments, setMeetingAttachments] = useState<AttachmentTypes[] | null> (null);
+    const [meetingAttachments, setMeetingAttachments] = useState<AttachmentTypes[] | null>(null);
 
     const [penalties, setPenalties] = useState<PenaltyTypes[]>([]);
     const [totalPenalties, setTotalPenalties] = useState(0);
@@ -96,7 +97,9 @@ export default function Member() {
 
     if (!member || !meetingAttachments) {
         return (
-            <div>loading</div>
+            <div className="loading-wheel">
+                <RotatingWheelLoader />
+            </div>
         )
     }
 
@@ -344,7 +347,7 @@ export default function Member() {
                     <h3>Latest Meeting Reports</h3>
                     <div className="meeting-reports">
                         {
-                            meetingAttachments.slice(0,3).map((attachment, index) => {
+                            meetingAttachments.slice(0, 3).map((attachment, index) => {
                                 return (
                                     <div className="meeting-report" key={index}>
                                         <div className="report-document-type">
