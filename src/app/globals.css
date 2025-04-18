@@ -2080,8 +2080,7 @@ input {
     flex-wrap: wrap;
   }
   .table-popup  {
-    width: 100%;
-    padding: 14px;
+    width: 90%;
   }
 }
 @media (max-width: 360px) {
