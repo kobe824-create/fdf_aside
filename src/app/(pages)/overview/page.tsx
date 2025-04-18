@@ -101,7 +101,7 @@ export default function Page() {
                                 <h4>Member present</h4>
                                 <div className="member-present">
                                     <div className="member-img-cont">
-                                        <img src="https://s3-alpha-sig.figma.com/img/2c36/bc97/e1525a4fed3462b2cbb0eada643893da?Expires=1741564800&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=XytbMq-zDrC6SR0NvnLlQRsQ-pS9XPAwY01Nr0GWLdW39dWcBfc0Y3ogQv5yVN1CUkuqNN6~bgO7D6XVGJBY4fH4X3GqGxQVIrdQOI3ZgERVRH0o0UWFOcyfr4QiExN7or5NoF1-Hwux5XbjwME5K2xtyMOclL4kKM9DZxkl4jITmrAinRJVWx625MXOAripzx85oALCUjWGZ3lk47sMSDZBV6Kf492cVhS6as46vDG0XZDSPmTmeRdsy~LDUDSrdIr3hsqzPQCsOqYKJdK1x38ATM35c2GwgKkFjbrcdJFbDu009BpRD1U4NXeFkSKN-~99nNSr5xGT8j-rwjT0lg__" alt="member" />
+                                    <img src="/images/profilePic/unknown.png" alt="member" />
                                     </div>
                                     <div className="member-name-chechin-time">
                                         <h5>Benjamin Joel</h5>
@@ -110,7 +110,7 @@ export default function Page() {
                                 </div>
                                 <div className="member-present">
                                     <div className="member-img-cont">
-                                        <img src="https://s3-alpha-sig.figma.com/img/2c36/bc97/e1525a4fed3462b2cbb0eada643893da?Expires=1741564800&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=XytbMq-zDrC6SR0NvnLlQRsQ-pS9XPAwY01Nr0GWLdW39dWcBfc0Y3ogQv5yVN1CUkuqNN6~bgO7D6XVGJBY4fH4X3GqGxQVIrdQOI3ZgERVRH0o0UWFOcyfr4QiExN7or5NoF1-Hwux5XbjwME5K2xtyMOclL4kKM9DZxkl4jITmrAinRJVWx625MXOAripzx85oALCUjWGZ3lk47sMSDZBV6Kf492cVhS6as46vDG0XZDSPmTmeRdsy~LDUDSrdIr3hsqzPQCsOqYKJdK1x38ATM35c2GwgKkFjbrcdJFbDu009BpRD1U4NXeFkSKN-~99nNSr5xGT8j-rwjT0lg__" alt="member" />
+                                    <img src="/images/profilePic/unknown.png" alt="member" />
                                     </div>
                                     <div className="member-name-chechin-time">
                                         <h5>Benjamin Joel</h5>
@@ -119,7 +119,7 @@ export default function Page() {
                                 </div>
                                 <div className="member-present">
                                     <div className="member-img-cont">
-                                        <img src="https://s3-alpha-sig.figma.com/img/2c36/bc97/e1525a4fed3462b2cbb0eada643893da?Expires=1741564800&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=XytbMq-zDrC6SR0NvnLlQRsQ-pS9XPAwY01Nr0GWLdW39dWcBfc0Y3ogQv5yVN1CUkuqNN6~bgO7D6XVGJBY4fH4X3GqGxQVIrdQOI3ZgERVRH0o0UWFOcyfr4QiExN7or5NoF1-Hwux5XbjwME5K2xtyMOclL4kKM9DZxkl4jITmrAinRJVWx625MXOAripzx85oALCUjWGZ3lk47sMSDZBV6Kf492cVhS6as46vDG0XZDSPmTmeRdsy~LDUDSrdIr3hsqzPQCsOqYKJdK1x38ATM35c2GwgKkFjbrcdJFbDu009BpRD1U4NXeFkSKN-~99nNSr5xGT8j-rwjT0lg__" alt="member" />
+                                    <img src="/images/profilePic/unknown.png" alt="member" />
                                     </div>
                                     <div className="member-name-chechin-time">
                                         <h5>Benjamin Joel</h5>
@@ -128,7 +128,7 @@ export default function Page() {
                                 </div>
                                 <div className="member-present">
                                     <div className="member-img-cont">
-                                        <img src="https://s3-alpha-sig.figma.com/img/2c36/bc97/e1525a4fed3462b2cbb0eada643893da?Expires=1741564800&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=XytbMq-zDrC6SR0NvnLlQRsQ-pS9XPAwY01Nr0GWLdW39dWcBfc0Y3ogQv5yVN1CUkuqNN6~bgO7D6XVGJBY4fH4X3GqGxQVIrdQOI3ZgERVRH0o0UWFOcyfr4QiExN7or5NoF1-Hwux5XbjwME5K2xtyMOclL4kKM9DZxkl4jITmrAinRJVWx625MXOAripzx85oALCUjWGZ3lk47sMSDZBV6Kf492cVhS6as46vDG0XZDSPmTmeRdsy~LDUDSrdIr3hsqzPQCsOqYKJdK1x38ATM35c2GwgKkFjbrcdJFbDu009BpRD1U4NXeFkSKN-~99nNSr5xGT8j-rwjT0lg__" alt="member" />
+                                        <img src="/images/profilePic/unknown.png" alt="member" />
                                     </div>
                                     <div className="member-name-chechin-time">
                                         <h5>Benjamin Joel</h5>
@@ -137,7 +137,7 @@ export default function Page() {
                                 </div>
                                 <div className="member-present">
                                     <div className="member-img-cont">
-                                        <img src="https://s3-alpha-sig.figma.com/img/2c36/bc97/e1525a4fed3462b2cbb0eada643893da?Expires=1741564800&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=XytbMq-zDrC6SR0NvnLlQRsQ-pS9XPAwY01Nr0GWLdW39dWcBfc0Y3ogQv5yVN1CUkuqNN6~bgO7D6XVGJBY4fH4X3GqGxQVIrdQOI3ZgERVRH0o0UWFOcyfr4QiExN7or5NoF1-Hwux5XbjwME5K2xtyMOclL4kKM9DZxkl4jITmrAinRJVWx625MXOAripzx85oALCUjWGZ3lk47sMSDZBV6Kf492cVhS6as46vDG0XZDSPmTmeRdsy~LDUDSrdIr3hsqzPQCsOqYKJdK1x38ATM35c2GwgKkFjbrcdJFbDu009BpRD1U4NXeFkSKN-~99nNSr5xGT8j-rwjT0lg__" alt="member" />
+                                    <img src="/images/profilePic/unknown.png" alt="member" />
                                     </div>
                                     <div className="member-name-chechin-time">
                                         <h5>Benjamin Joel</h5>
