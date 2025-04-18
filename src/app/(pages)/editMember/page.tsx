@@ -51,7 +51,13 @@ export default function EditMember() {
         });
     }, [id, resetUser])
 
-
+    if (user._id   === "") {
+        return (
+            <div>
+                Loading...
+            </div>
+        )
+    }
 
 
     const userFormValidation = () => {
