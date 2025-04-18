@@ -11,12 +11,13 @@ import TablePopup from "@/components/tablePopup";
 import SharePopup from "@/components/sharePopup";
 
 import { saveAs } from "file-saver";
+import Button from "@/components/button";
 
 
 export default function MyAccount() {
     const router = useRouter();
 
-    const { user, loading } = useAuth();
+    const { user, loading, logout } = useAuth();
 
     const [member, setMember] = useState<UserTypes | null>(null);
     const [meetingAttachments, setMeetingAttachments] = useState<AttachmentTypes[]>([]);
@@ -110,7 +111,7 @@ export default function MyAccount() {
             </div>
         )
     }
-    
+
     return (
         <div className="my-account-page">
             <div className="popup-background"
@@ -344,6 +345,13 @@ export default function MyAccount() {
                     </div>
 
                 </div>
+                <Button 
+                    label="Logout"
+                    onClick={() => {
+                        logout();
+                    }}
+                    className="button-tertially logout-btn"
+                />
             </div>
         </div>
     );

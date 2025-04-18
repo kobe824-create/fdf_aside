@@ -830,6 +830,7 @@ input {
   height: 37px;
   border-radius: 50%;
   overflow: hidden;
+  cursor: pointer;
 }
 .profile-img-container img {
   width: 100%;
@@ -1227,6 +1228,7 @@ input {
   width: 100%;
   border-collapse: collapse;
 }
+
 .investment-table th {
   font-family: "Inter" sans-serif;
   font-weight: 500;
@@ -1443,6 +1445,10 @@ input {
   height: 64px;
   border-radius: 8px;
   background-color: #f1e7f8;
+}
+
+.logout-btn {
+  display: none;
 }
 
 /*notifications-page*/
@@ -1950,6 +1956,10 @@ input {
   .code-of-conduct-conytainer {
     padding: 12px;
     gap: 16px;
+  }
+  
+  .logout-btn {
+    display: block;
   }
 }
 
