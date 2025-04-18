@@ -263,7 +263,7 @@ export default function Page() {
                     <Table
                         data={{
                             tableHeaders: ["Name"],
-                            tableData: users.map((user) => [user.lastname]),
+                            tableData: users.map((user) => [user.lastname + " " + user.firstname]),
                             type: "normal",
                             title: `${users.length} Members`
                         }}
