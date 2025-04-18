@@ -4,6 +4,7 @@ import MemberEditPopup from "@/components/memberEditPopup";
 import SelectFormField from "@/components/selectFormField";
 import axios from "axios";
 import { useCallback, useEffect, useState } from "react";
+import Image from "next/image";
 import { FileRejection, useDropzone } from "react-dropzone";
 import { useSearchParams } from "next/navigation";
 import Button from "@/components/button";
@@ -165,9 +166,11 @@ export default function EditMember() {
                             <input {...getInputProps()} />
                             {
                                 files.length > 0 ? (
-                                    <img src={files[0].preview} alt="profile" />
-                                ) :
-                                    (<p>Upload photo</p>)
+                                    <Image src={files[0].preview} alt="profile" width={100} height={100} />
+                                    // <img src={files[0].preview} alt="profile" />
+                                ) : (
+                                    <p>Upload photo</p>
+                                )
                             }
 
                         </div>
