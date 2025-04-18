@@ -94,7 +94,11 @@ export default function Member() {
         saveAs(fileUrl, fileName);
     };
 
-
+    if (!member) {
+        return (
+            <div>loading</div>
+        )
+    }
 
     return (
         <div className="my-account-page">

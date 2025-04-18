@@ -1,7 +1,7 @@
 "use client";
 import LogoContainer from "@/components/logoContainer";
 import { useEffect, useState } from "react";
-import { useRouter, redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useAuth } from "@/lib/auth/authProvider";
 import { UserTypes } from "@/utils/types";
 import axios from "axios";
@@ -93,8 +93,7 @@ export default function TabsLayout({
 
     useEffect(() => {
         if (!user && !loading) {
-            // router.push("/login");
-            redirect("/login");
+            router.push("/login");
         }
     }, [user, loading, router ]);
 

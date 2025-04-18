@@ -13,7 +13,7 @@ export default function Members() {
 
   const router = useRouter();
 
-  const [users, setUsers] = useState<UserTypes[]>([]);
+  const [users, setUsers] = useState<UserTypes[] | null>(null);
   const [filteredUsers, setFilteredUsers] = useState<UserTypes[]>([]);
 
   // Pagination States
@@ -42,6 +42,7 @@ export default function Members() {
   }, [])
 
   const filterUsers = (filter: string) => {
+    if (!users) return;
     if (filter === "all") {
       setFilteredUsers(users);
     } else {
@@ -52,6 +53,7 @@ export default function Members() {
   }
 
   const searchMember = (search: string) => {
+    if (!users) return;
     if (search === "") {
       setFilteredUsers(users);
     } else {
@@ -69,6 +71,11 @@ export default function Members() {
   // Change page
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
+  if (!users) {
+    return (
+      <div> loading </div>
+    )
+  }
 
   return (
     <div className="members-page">
