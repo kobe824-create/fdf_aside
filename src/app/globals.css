@@ -2082,6 +2082,12 @@ input {
   .table-popup  {
     width: 90%;
   }
+
+  .mark-attendance-poppup {
+    width: 90%;
+    padding: 16px;
+    gap: 8px;
+  }
 }
 @media (max-width: 360px) {
   .table tr td,
