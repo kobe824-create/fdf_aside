@@ -852,7 +852,7 @@ input {
   line-height: 19.52px;
 }
 .child-container {
-  padding: 70px 18px 18px;
+  padding: 88px 18px 18px;
   width: 100%;
   height: 100%;
   overflow: scroll;
@@ -862,7 +862,8 @@ input {
   position: fixed;
   top: 0;
   left: 248px;
-  width: 100%;
+  right: 0;
+  /* width: 100%; */
   /* height: 100vh; */
   background-color: #fff;
   z-index: 9999;
