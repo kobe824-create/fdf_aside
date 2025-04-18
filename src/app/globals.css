@@ -2081,7 +2081,7 @@ input {
   }
   .table-popup  {
     width: 100%;
-    padding: 16px;
+    padding: 14px;
   }
 }
 @media (max-width: 360px) {
