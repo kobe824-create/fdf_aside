@@ -2065,6 +2065,9 @@ input {
   .table tr td {
     font-size: 12px;
   }
+  .table thead th {
+    font-size: 12px;
+  }
   .my-account-heading button {
     width: 100%;
     /* padding: 10px */
