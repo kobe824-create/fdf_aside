@@ -26,7 +26,7 @@ export default function Member() {
     const [updateData, setUpdateData] = useState(0);
     const [totalContributions, setTotalContributions] = useState(0);
     const [totalPendingContributions, setTotalPendingContributions] = useState(0);
-    const [meetingAttachments, setMeetingAttachments] = useState<AttachmentTypes[]>([]);
+    const [meetingAttachments, setMeetingAttachments] = useState<AttachmentTypes[] | null> (null);
 
     const [penalties, setPenalties] = useState<PenaltyTypes[]>([]);
     const [totalPenalties, setTotalPenalties] = useState(0);
@@ -94,7 +94,7 @@ export default function Member() {
         saveAs(fileUrl, fileName);
     };
 
-    if (!member) {
+    if (!member || !meetingAttachments) {
         return (
             <div>loading</div>
         )
