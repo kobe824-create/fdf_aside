@@ -406,14 +406,10 @@ input {
   /* font-family: "Zain", sans-serif; */
   font-family: "Nunito", sans-serif;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 15px;
   line-height: 24px;
-/* 
-  font-family: "Nunito", sans-serif;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 24px; */
 }
+
 .table tr {
   border-bottom: 1px solid #e9eaea;
   /* height: 78px; */
