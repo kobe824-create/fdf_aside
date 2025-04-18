@@ -11,7 +11,7 @@ export default function Page() {
 
 
 
-    const [users, setUsers] = useState<UserTypes[]>([]);
+    const [users, setUsers] = useState<UserTypes[] | null>([]);
 
     useEffect(() => {
         axios.get("/api/users/get")
@@ -22,6 +22,12 @@ export default function Page() {
                 console.log(err);
             })
     }, [])
+
+    if (!users) {
+        return (
+            <div>loading...</div>
+        )
+    }
     return (
         <div className="overview-page-wrapper">
 

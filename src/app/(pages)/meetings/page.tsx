@@ -6,10 +6,11 @@ import { MeetingTypes } from "@/utils/types";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 export default function Meetings() {
     const router = useRouter();
-    const [meetings, setMeetings] = useState<MeetingTypes[]>([]);
+    const [meetings, setMeetings] = useState<MeetingTypes[] | null>(null);
 
     useEffect(() => {
         axios.get("/api/meetings/get")
@@ -23,6 +24,20 @@ export default function Meetings() {
 
     const { user } = useAuth();
 
+    if (!user) {
+        toast.error("You are not logged in");
+        router.push("/login");
+    }
+
+    if (!meetings) {
+        return (
+            <div className="meeting-page">
+                <div className="meeting-body">
+                    <h2>Loading...</h2>
+                </div>
+            </div>
+        )
+    }
 
     return (
         <div className="meeting-page">
