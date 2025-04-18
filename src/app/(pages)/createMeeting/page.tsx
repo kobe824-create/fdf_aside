@@ -4,12 +4,14 @@ import FormField from "@/components/formField";
 import TextAreaField from "@/components/textAreaField";
 import { useState } from "react";
 import axios from "axios";
-import { useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 import toast from "react-hot-toast";
+import RotatingWheelLoader from "@/components/rotatingWheel";
 
 export default function Page() {
 
-    const router = useRouter();
+    // const router = useRouter();
+    const [isLoading, setIsLoading] = useState(false);
 
     const [meeting, setMeeting] = useState({
         title: "",
@@ -20,14 +22,31 @@ export default function Page() {
         description: ""
     });
 
-    const handleCreateMeeting = async(e: React.FormEvent<HTMLFormElement>) => {
+    const handleCreateMeeting = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
+            setIsLoading(true);
             const response = await axios.post("/api/meetings/create", meeting);
             if (response.status === 201) {
-                console.log("Meeting created successfully");
-                toast.success("Meeting created successfully")
-                router.push("/meetings");
+                // console.log("Meeting created successfully");
+                toast.success("Meeting created successfully", {
+                    duration: 3000,
+                    position: "top-right",
+                })
+                setMeeting({
+                    title: "",
+                    date: "",
+                    startTime: "",
+                    endTime: "",
+                    location: "",
+                    description: ""
+                });
+                setIsLoading(false);
+                // Redirect to the meetings page
+                redirect("/meetings");
+                // router.push("/meetings");
+
+
             }
         } catch (error: unknown) {
             if (axios.isAxiosError(error) && error.response) {
@@ -36,6 +55,13 @@ export default function Page() {
                 console.log("Server Error");
             }
         }
+    }
+    if (isLoading) {
+        return (
+            <div className="loading-wheel">
+                <RotatingWheelLoader />
+            </div>
+        )
     }
 
     return (
