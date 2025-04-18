@@ -668,6 +668,9 @@ input {
   border-bottom: 1px solid #00000033;
   width: 100%;
   height: 70px;
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 .side-bar-heading .logo-container {
   justify-content: flex-start;
@@ -678,6 +681,7 @@ input {
   background-color: #f5f5f5;
   height: 100vh;
   justify-content: flex-start;
+  padding: 70px 0 0;
 }
 .navlink {
   gap: 8px;
@@ -846,10 +850,20 @@ input {
   line-height: 19.52px;
 }
 .child-container {
-  padding: 18px;
+  padding: 70px 18px 18px;
   width: 100%;
   height: 100%;
   overflow: scroll;
+}
+
+.fixed-layer {
+  position: fixed;
+  top: 0;
+  left: 248px;
+  width: 100%;
+  /* height: 100vh; */
+  background-color: #fff;
+  z-index: 9999;
 }
 .overview-page-wrapper {
   gap: 16px;
@@ -1851,6 +1865,9 @@ input {
 
   .side-bar {
     display: none;
+  }
+  .fixed-layer {
+    left: 0;
   }
   .navlinks-container-responsive{
     display: flex;
