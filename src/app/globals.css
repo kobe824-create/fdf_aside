@@ -406,7 +406,7 @@ input {
   /* font-family: "Zain", sans-serif; */
   font-family: "Nunito", sans-serif;
   font-weight: 400;
-  font-size: 15px;
+  font-size: 14px;
   line-height: 24px;
 }
 
@@ -1096,13 +1096,14 @@ input {
 
 .popup-background {
   position: fixed;
-  top: 0;
+  top: 70px;
   bottom: 0;
   left: 0;
+  right: 0;
   width: 100%;
-  height: 100vh;
   background-color: #00000033;
   padding: 12px;
+  overflow: auto;
 }
 
 /* code of conduct */
@@ -1893,6 +1894,9 @@ input {
   .navlinks-container-responsive{
     display: flex;
   }
+  .popup-background {
+    top: 140px;
+  }
 }
 
 /* Medium screens (Tablets & Small Laptops) */
@@ -2055,9 +2059,12 @@ input {
   .members-table tr th {
     font-size: 10px;
   }
-  .table tr td,
+
   .members-table tr td {
     font-size: 10px;
+  }
+  .table tr td {
+    font-size: 12px;
   }
   .my-account-heading button {
     width: 100%;
