@@ -33,23 +33,23 @@ export default function MyAccount() {
     const [share, setShare] = useState(0);
 
     useEffect(() => {
-     
+
         if (user) {
             axios.post("/api/users/getUserByPhone", { phoneNumber: user.phoneNumber })
-            .then((res) => {
-                setMember(res.data.user);
-            })
-            .catch((err) => {
-                console.error(err);
-            });
+                .then((res) => {
+                    setMember(res.data.user);
+                })
+                .catch((err) => {
+                    console.error(err);
+                });
 
             axios.post("/api/contributions/getUserContributions", { id: user.id }).then((res) => {
-            setContributions(res.data.contributions.filter((contribution: ContributionTypes) => {
-                return (contribution.status === "paid")
-            }));
-            setPendingContributions(res.data.contributions.filter((contribution: ContributionTypes) => {
-                return (contribution.status === "unpaid")
-            }));
+                setContributions(res.data.contributions.filter((contribution: ContributionTypes) => {
+                    return (contribution.status === "paid")
+                }));
+                setPendingContributions(res.data.contributions.filter((contribution: ContributionTypes) => {
+                    return (contribution.status === "unpaid")
+                }));
             }).catch((err) => {
                 console.log(err);
             });
@@ -84,7 +84,7 @@ export default function MyAccount() {
         setTotalPendingContributions(pendingContributions.reduce((acc, contribution) => {
             return acc + Number(contribution.amount);
         }, 0));
-        
+
     }, [contributions, pendingContributions])
 
     useEffect(() => {
@@ -106,8 +106,66 @@ export default function MyAccount() {
 
     if (!member) {
         return (
-            <div className="loading">
-                <p>Loading...</p>
+            <div className="loading-wheel">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" width="100" height="100" style={{display: "block", background: "rgb(255, 255, 255)"}}><g><g transform="translate(80,50)">
+                    <g transform="rotate(0)">
+                        <circle fillOpacity="1" fill="#ff727d" r="6" cy="0" cx="0">
+                            <animateTransform repeatCount="indefinite" dur="1s" keyTimes="0;1" values="1.5 1.5;1 1" begin="-0.875s" type="scale" attributeName="transform" />
+                            <animate begin="-0.875s" values="1;0" repeatCount="indefinite" dur="1s" keyTimes="0;1" attributeName="fillOpacity" />
+                        </circle>
+                    </g>
+                </g><g transform="translate(71.21320343559643,71.21320343559643)">
+                        <g transform="rotate(45)">
+                            <circle fillOpacity="0.875" fill="#ff727d" r="6" cy="0" cx="0">
+                                <animateTransform repeatCount="indefinite" dur="1s" keyTimes="0;1" values="1.5 1.5;1 1" begin="-0.75s" type="scale" attributeName="transform" />
+                                <animate begin="-0.75s" values="1;0" repeatCount="indefinite" dur="1s" keyTimes="0;1" attributeName="fillOpacity" />
+                            </circle>
+                        </g>
+                    </g><g transform="translate(50,80)">
+                        <g transform="rotate(90)">
+                            <circle fillOpacity="0.75" fill="#ff727d" r="6" cy="0" cx="0">
+                                <animateTransform repeatCount="indefinite" dur="1s" keyTimes="0;1" values="1.5 1.5;1 1" begin="-0.625s" type="scale" attributeName="transform" />
+                                <animate begin="-0.625s" values="1;0" repeatCount="indefinite" dur="1s" keyTimes="0;1" attributeName="fillOpacity" />
+                            </circle>
+                        </g>
+                    </g><g transform="translate(28.786796564403577,71.21320343559643)">
+                        <g transform="rotate(135)">
+                            <circle fillOpacity="0.625" fill="#ff727d" r="6" cy="0" cx="0">
+                                <animateTransform repeatCount="indefinite" dur="1s" keyTimes="0;1" values="1.5 1.5;1 1" begin="-0.5s" type="scale" attributeName="transform" />
+                                <animate begin="-0.5s" values="1;0" repeatCount="indefinite" dur="1s" keyTimes="0;1" attributeName="fillOpacity" />
+                            </circle>
+                        </g>
+                    </g><g transform="translate(20,50.00000000000001)">
+                        <g transform="rotate(180)">
+                            <circle fillOpacity="0.5" fill="#ff727d" r="6" cy="0" cx="0">
+                                <animateTransform repeatCount="indefinite" dur="1s" keyTimes="0;1" values="1.5 1.5;1 1" begin="-0.375s" type="scale" attributeName="transform" />
+                                <animate begin="-0.375s" values="1;0" repeatCount="indefinite" dur="1s" keyTimes="0;1" attributeName="fillOpacity" />
+                            </circle>
+                        </g>
+                    </g><g transform="translate(28.78679656440357,28.786796564403577)">
+                        <g transform="rotate(225)">
+                            <circle fillOpacity="0.375" fill="#ff727d" r="6" cy="0" cx="0">
+                                <animateTransform repeatCount="indefinite" dur="1s" keyTimes="0;1" values="1.5 1.5;1 1" begin="-0.25s" type="scale" attributeName="transform" />
+                                <animate begin="-0.25s" values="1;0" repeatCount="indefinite" dur="1s" keyTimes="0;1" attributeName="fillOpacity" />
+                            </circle>
+                        </g>
+                    </g><g transform="translate(49.99999999999999,20)">
+                        <g transform="rotate(270)">
+                            <circle fillOpacity="0.25" fill="#ff727d" r="6" cy="0" cx="0">
+                                <animateTransform repeatCount="indefinite" dur="1s" keyTimes="0;1" values="1.5 1.5;1 1" begin="-0.125s" type="scale" attributeName="transform" />
+                                <animate begin="-0.125s" values="1;0" repeatCount="indefinite" dur="1s" keyTimes="0;1" attributeName="fillOpacity" />
+                            </circle>
+                        </g>
+                    </g><g transform="translate(71.21320343559643,28.78679656440357)">
+                        <g transform="rotate(315)">
+                            <circle fillOpacity="0.125" fill="#ff727d" r="6" cy="0" cx="0">
+                                <animateTransform repeatCount="indefinite" dur="1s" keyTimes="0;1" values="1.5 1.5;1 1" begin="0s" type="scale" attributeName="transform" />
+                                <animate begin="0s" values="1;0" repeatCount="indefinite" dur="1s" keyTimes="0;1" attributeName="fillOpacity" />
+                            </circle>
+                        </g>
+                    </g><g />
+                </g>
+                </svg>
             </div>
         )
     }
@@ -319,7 +377,7 @@ export default function MyAccount() {
                     <h3>Latest Meeting Reports</h3>
                     <div className="meeting-reports">
                         {
-                            meetingAttachments.slice(0,3).map((attachment, index) => {
+                            meetingAttachments.slice(0, 3).map((attachment, index) => {
                                 return (
                                     <div className="meeting-report" key={index}>
                                         <div className="report-document-type">
@@ -345,7 +403,7 @@ export default function MyAccount() {
                     </div>
 
                 </div>
-                <Button 
+                <Button
                     label="Logout"
                     onClick={() => {
                         logout();
