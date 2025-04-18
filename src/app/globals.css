@@ -716,6 +716,8 @@ input {
   padding: 12px;
   gap: 8px;
   display: none;
+  background-color: #fff;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
 }
 .navlink p {
   font-family: "Zain", sans-serif;
