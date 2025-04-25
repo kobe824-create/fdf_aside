@@ -2085,19 +2085,30 @@ input {
   .table tr th,
   .members-table tr th {
     font-size: 10px;
-    padding: 4px;
+    padding: 5px;
   }
 
   .members-table tr td {
     font-size: 10px;
   }
   .table tr td {
-    font-size: 11px;
-    padding: 4px;
+    font-size: 12px;
+    padding: 5px;
   }
   .table thead th {
     font-size: 12px;
   }
+  .table.colored tr td {
+    font-size: 9px;
+    padding: 2px;
+  }
+  .table.colored thead th {
+    font-size: 10px;
+  }
+
+
+
+
   .my-account-heading button {
     width: 100%;
     /* padding: 10px */

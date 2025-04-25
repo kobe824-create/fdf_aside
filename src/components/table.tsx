@@ -43,7 +43,7 @@ export default function Table(props: { data: TableProps }) {
     }
 
     return (
-        <div className="table">
+        <div className={`table ${data.type ? data.type : ""}`}>
             <div className="popup-background"
                 style={{ display: popupDisplay ? "flex" : "none" }}
                 onClick={() => {
