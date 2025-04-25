@@ -1,9 +1,10 @@
-export default function FinancialCard(props: { label: string, amount: number, onclick: () => void }) {
-    const { label, amount, onclick } = props;
+export default function FinancialCard(props: { label: string, amount: number, onclick: () => void, style?: React.CSSProperties }) {
+    const { label, amount, onclick, style } = props;
 
 
     return (
         <div className="financial-card"
+            style={style}
             onClick={onclick}
         >
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">

@@ -2106,6 +2106,18 @@ input {
     padding: 16px;
     gap: 8px;
   }
+
+  .financial-cards-wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .financial-cards-wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columns of equal width */
+    /* grid-template-rows: 1fr 1fr;       3 rows: first and third = 1fr, second = 2fr */
+  }
+  
 }
 @media (max-width: 360px) {
   .table tr td,

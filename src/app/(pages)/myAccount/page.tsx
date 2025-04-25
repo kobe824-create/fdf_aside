@@ -19,7 +19,6 @@ export default function MyAccount() {
     const router = useRouter();
 
     const { user, loading, logout } = useAuth();
-
     const [member, setMember] = useState<UserTypes | null>(null);
     const [meetingAttachments, setMeetingAttachments] = useState<AttachmentTypes[]>([]);
     const [popup, setPopup] = useState("updateContribution");
@@ -246,39 +245,46 @@ export default function MyAccount() {
 
             <div className="financial-cards-wrapper">
                 <FinancialCard
-                    label="Total Contributions"
-                    amount={totalContributions}
+                    label="Share"
+                    amount={share}
+                    style={{ gridColumn: "1 / span 2", gridRow: "1" }}
                     onclick={() => {
-                        setPopup("contributionstable")
+                        setPopup("sharepopup");
                         setPopupDisplay(true);
-
                     }}
                 />
+
                 <FinancialCard
                     label="Pending Contributions"
                     amount={totalPendingContributions}
+                    style={{ gridColumn: "1", gridRow: "2" }}
                     onclick={() => {
-                        setPopup("pending")
+                        setPopup("pending");
                         setPopupDisplay(true);
                     }}
                 />
+
                 <FinancialCard
                     label="Penalties"
                     amount={totalPenalties}
+                    style={{ gridColumn: "2", gridRow: "2" }}
                     onclick={() => {
-                        setPopup("penalties")
+                        setPopup("penalties");
                         setPopupDisplay(true);
                     }}
                 />
+
                 <FinancialCard
-                    label="Share"
-                    amount={share}
+                    label="Total Contributions"
+                    amount={totalContributions}
+                    style={{ gridColumn: "1 / span 2", gridRow: "3" }}
                     onclick={() => {
-                        setPopup("sharepopup")
+                        setPopup("contributionstable");
                         setPopupDisplay(true);
                     }}
                 />
             </div>
+
             <div className="my-account-bottom-container">
                 <div className="investment-allocation-cont">
                     <h3>
@@ -299,17 +305,17 @@ export default function MyAccount() {
                                 <td>10000</td>
                             </tr>
                             <tr>
-                                <td>General Investment</td>
+                                <td>Land Investment</td>
                                 <td>100000</td>
                                 <td>10000</td>
                             </tr>
                             <tr>
-                                <td>General Investment</td>
+                                <td>Investment2</td>
                                 <td>100000</td>
                                 <td>10000</td>
                             </tr>
                             <tr>
-                                <td>General Investment</td>
+                                <td>Investment3</td>
                                 <td>100000</td>
                                 <td>10000</td>
                             </tr>

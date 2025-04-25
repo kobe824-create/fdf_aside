@@ -278,13 +278,16 @@ export default function Page() {
             <div className="overview-tables">
                 <Table
                     data={{
-                        tableHeaders: ["Name", "Email", "Role", "Status"],
+                        tableHeaders: ["Name", "Land investment", "investment2", "investment3"],
                         tableData: [
-                            ["John Darcey", "johnd@gmail.com", "Admin", "Active"],
-                            ["John Darcey", "johnd@gmail.com", "Admin", "Active"],
-                            ["John Darcey", "johnd@gmail.com", "Admin", "Active"],
-                            ["John Darcey", "johnd@gmail.com", "Admin", "Active"],
-                            ["John Darcey", "johnd@gmail.com", "Admin", "Active"],
+                            ["John Darcey", "500,000", "350,000", "400,000"],
+                            ["John Darcey", "425,000", "370,000", "650,000"],
+                            ["John Darcey", "270,000", "300,000", "700,000"],
+                            ["John Darcey", "150,000", "400,000", "700,000"],
+                            ["John Darcey", "280,000", "700,000", "900,000"],
+                            ["John Darcey", "270,000", "300,000", "700,000"],
+                            ["John Darcey", "150,000", "400,000", "700,000"],
+                            ["John Darcey", "280,000", "700,000", "900,000"],
                         ],
                         type: "normal",
                         title: "General Overview of Members and their Shares"
