@@ -24,7 +24,7 @@ export default function Page() {
             })
     }, [])
 
-    if (!users) {
+    if (!users || users.length === 0) {
         return (
             <div className="loading-wheel">
                 <RotatingWheelLoader />
@@ -295,22 +295,23 @@ export default function Page() {
                     data={{
                         tableHeaders: ["Name", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
                         tableData: [
-                            ["John", "red", "green", "red", "red", "red", "green", "red", "green", "red", "red", "red", "green"],
-                            ["John", "red", "green", "red", "red", "red", "red", "red", "green", "red", "red", "red", "green"],
-                            ["John", "red", "green", "red", "red", "red", "green", "red", "green", "red", "red", "red", "green"],
-                            ["John", "red", "green", "red", "red", "red", "green", "red", "green", "red", "red", "red", "green"],
-                            ["John", "red", "green", "red", "green", "red", "red", "red", "green", "red", "red", "red", "green"],
-                            ["John", "red", "green", "red", "red", "red", "green", "red", "green", "red", "red", "red", "green"],
-                            ["John", "red", "green", "red", "red", "red", "green", "red", "green", "red", "red", "red", "green"],
-                            ["John", "red", "green", "red", "red", "red", "green", "red", "green", "red", "red", "red", "green"],
-                            ["John", "red", "green", "red", "red", "red", "green", "red", "green", "red", "red", "red", "green"],
-                            ["John", "red", "green", "red", "red", "red", "green", "red", "green", "red", "red", "red", "green"],
-                            ["John", "red", "green", "red", "red", "red", "green", "red", "green", "red", "red", "red", "green"],
-                            ["John", "red", "green", "red", "red", "red", "green", "red", "green", "red", "red", "red", "green"],
-                            ["John", "red", "green", "red", "red", "red", "red", "red", "green", "red", "red", "red", "green"],
-                            ["John", "red", "green", "red", "red", "red", "green", "red", "green", "red", "red", "red", "green"],
-                            ["John", "red", "green", "red", "red", "red", "green", "red", "green", "red", "red", "red", "green"],
-                            ["John", "red", "green", "red", "red", "red", "green", "red", "green", "red", "red", "red", "green"],
+                            [users[0].lastname, "red", "green", "red", "red", "red", "green", "red", "green", "red", "red", "red", "green"],
+                            [users[1].lastname, "red", "green", "red", "red", "red", "red", "red", "green", "red", "red", "red", "green"],
+                            [users[2].lastname, "red", "green", "red", "red", "red", "red", "red", "green", "red", "red", "red", "green"],
+                            [users[3].lastname, "red", "green", "red", "red", "red", "green", "red", "green", "red", "red", "red", "green"],
+                            [users[4].lastname.split(" ")[0], "red", "green", "red", "red", "red", "green", "red", "green", "red", "red", "red", "green"],
+                            [users[5].lastname, "red", "green", "red", "green", "red", "red", "red", "green", "red", "red", "red", "green"],
+                            [users[6].lastname, "red", "green", "red", "red", "red", "green", "red", "green", "red", "red", "red", "green"],
+                            [users[7].lastname, "red", "green", "red", "red", "red", "green", "red", "green", "red", "red", "red", "green"],
+                            [users[8].lastname, "red", "green", "red", "red", "red", "green", "red", "green", "red", "red", "red", "green"],
+                            [users[9].lastname, "red", "green", "red", "red", "red", "green", "red", "green", "red", "red", "red", "green"],
+                            [users[10].lastname, "red", "green", "red", "red", "red", "green", "red", "green", "red", "red", "red", "green"],
+                            [users[11].lastname, "red", "green", "red", "red", "red", "green", "red", "green", "red", "red", "red", "green"],
+                            [users[12].lastname, "red", "green", "red", "red", "red", "green", "red", "green", "red", "red", "red", "green"],
+                            [users[13].lastname, "red", "green", "red", "red", "red", "red", "red", "green", "red", "red", "red", "green"],
+                            [users[14].lastname, "red", "green", "red", "red", "red", "green", "red", "green", "red", "red", "red", "green"],
+                            [users[15].lastname, "red", "green", "red", "red", "red", "green", "red", "green", "red", "red", "red", "green"],
+                            [users[16].lastname, "red", "green", "red", "red", "red", "green", "red", "green", "red", "red", "red", "green"],
 
                         ],
                         type: "colored",
@@ -324,14 +325,14 @@ export default function Page() {
                     data={{
                         tableHeaders: ["Name", "Share", "Land investment", "investment2", "investment3"],
                         tableData: [
-                            ["John Darcey", "1,200,000", "500,000", "350,000", "400,000"],
-                            ["John Darcey", "900,000", "425,000", "370,000", "650,000"],
-                            ["John Darcey", "800,000", "270,000", "300,000", "700,000"],
-                            ["John Darcey", "750", "150,000", "400,000", "700,000"],
-                            ["John Darcey", "1,500,000", "280,000", "700,000", "900,000"],
-                            ["John Darcey", "850,000", "270,000", "300,000", "700,000"],
-                            ["John Darcey", "980,000", "150,000", "400,000", "700,000"],
-                            ["John Darcey", "870,000", "280,000", "700,000", "900,000"],
+                            [users[0].lastname, "1,200,000", "500,000", "350,000", "400,000"],
+                            [users[1].lastname, "900,000", "425,000", "370,000", "650,000"],
+                            [users[2].lastname, "800,000", "270,000", "300,000", "700,000"],
+                            [users[3].lastname.split(" ")[0], "750", "150,000", "400,000", "700,000"],
+                            [users[4].lastname.split(" ")[0], "1,500,000", "280,000", "700,000", "900,000"],
+                            [users[5].lastname, "850,000", "270,000", "300,000", "700,000"],
+                            [users[6].lastname, "980,000", "150,000", "400,000", "700,000"],
+                            [users[7].lastname, "870,000", "280,000", "700,000", "900,000"],
                         ],
                         type: "normal",
                         title: "General Overview of Members and their Shares"
