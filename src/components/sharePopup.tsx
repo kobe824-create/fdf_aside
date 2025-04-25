@@ -18,7 +18,7 @@ export default function SharePopup(props: MarkAttendancePopupProps) {
             <div className="mark-attendance-success">
                     <div className="login-page-heading">
                         <h2>Your share is RWF {amount}</h2>
-                        <p>The Shares is your Total contribution minus your Penalties</p>
+                        <p>The Share is your Total contribution minus your Penalties</p>
                     </div>
                     <Button
                         label="Close"
