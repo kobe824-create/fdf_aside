@@ -2107,8 +2107,6 @@ input {
   }
 
 
-
-
   .my-account-heading button {
     width: 100%;
     /* padding: 10px */
@@ -2157,9 +2155,21 @@ input {
   }
   
 }
-@media (max-width: 360px) {
+@media (max-width: 380px) {
   .table tr td,
   .members-table tr td {
     font-size: 8px;
+  }
+
+
+  .table.colored tr td {
+    font-size: 8px;
+    padding: 2px;
+  }
+  .table.colored thead th {
+    font-size: 8px;
+  }
+  .navlinks-container-responsive .navlink p{
+   font-size: 14px; 
   }
 }

@@ -547,6 +547,7 @@ export default function Page() {
                             </div>
                         </div>
                     </div>
+                    <div className="overview-page-body-right-side">
                     <Table
                         data={{
                             tableHeaders: ["Name"],
@@ -556,6 +557,8 @@ export default function Page() {
                         }}
 
                     />
+
+                </div>
                 </div>
 
 
