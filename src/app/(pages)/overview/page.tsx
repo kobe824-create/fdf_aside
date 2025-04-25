@@ -42,33 +42,34 @@ export default function Page() {
                 <div className="overview-page-body-left-side">
                     <div className="financial-cards-wrapper">
                         <FinancialCard
-                            label="General Investment"
-                            amount={100000}
+                            label="Shares"
+                            amount={12000000}
                             onclick={() => {
                                 console.log("Total Revenue");
                             }}
                         />
                         <FinancialCard
-                            label="General Investment"
-                            amount={100000}
+                            label="Land Investment"
+                            amount={2000000}
                             onclick={() => {
                                 console.log("Total Revenue");
                             }}
                         />
                         <FinancialCard
-                            label="General Investment"
-                            amount={100000}
+                            label="Investment2"
+                            amount={1500000}
                             onclick={() => {
                                 console.log("Total Revenue");
                             }}
                         />
                         <FinancialCard
-                            label="General Investment"
-                            amount={100000}
+                            label="Investment3"
+                            amount={12500000}
                             onclick={() => {
                                 console.log("Total Revenue");
                             }}
                         />
+
                     </div>
                     <div className="overview-middle-containers">
                         <div className="middle-cont">
@@ -276,23 +277,7 @@ export default function Page() {
                 </div>
             </div>
             <div className="overview-tables">
-                <Table
-                    data={{
-                        tableHeaders: ["Name", "Land investment", "investment2", "investment3"],
-                        tableData: [
-                            ["John Darcey", "500,000", "350,000", "400,000"],
-                            ["John Darcey", "425,000", "370,000", "650,000"],
-                            ["John Darcey", "270,000", "300,000", "700,000"],
-                            ["John Darcey", "150,000", "400,000", "700,000"],
-                            ["John Darcey", "280,000", "700,000", "900,000"],
-                            ["John Darcey", "270,000", "300,000", "700,000"],
-                            ["John Darcey", "150,000", "400,000", "700,000"],
-                            ["John Darcey", "280,000", "700,000", "900,000"],
-                        ],
-                        type: "normal",
-                        title: "General Overview of Members and their Shares"
-                    }}
-                />
+
 
                 <Table
                     data={{
@@ -309,18 +294,35 @@ export default function Page() {
                             ["John", "red", "green", "red", "red", "red", "green", "red", "green", "red", "red", "red", "green"],
                             ["John", "red", "green", "red", "red", "red", "green", "red", "green", "red", "red", "red", "green"],
                             ["John", "red", "green", "red", "red", "red", "green", "red", "green", "red", "red", "red", "green"],
-                            ["John", "red", "green", "red", "red", "red", "green", "red", "green", "red", "red", "red", "green"], 
+                            ["John", "red", "green", "red", "red", "red", "green", "red", "green", "red", "red", "red", "green"],
                             ["John", "red", "green", "red", "red", "red", "red", "red", "green", "red", "red", "red", "green"],
                             ["John", "red", "green", "red", "red", "red", "green", "red", "green", "red", "red", "red", "green"],
                             ["John", "red", "green", "red", "red", "red", "green", "red", "green", "red", "red", "red", "green"],
                             ["John", "red", "green", "red", "red", "red", "green", "red", "green", "red", "red", "red", "green"],
-               
+
                         ],
                         type: "colored",
                         title: "Last 6 Months Contribution Overview",
                         searchWords: [
                             "Names"
                         ]
+                    }}
+                />
+                <Table
+                    data={{
+                        tableHeaders: ["Name", "Share", "Land investment", "investment2", "investment3"],
+                        tableData: [
+                            ["John Darcey", "1,200,000", "500,000", "350,000", "400,000"],
+                            ["John Darcey", "900,000", "425,000", "370,000", "650,000"],
+                            ["John Darcey", "800,000", "270,000", "300,000", "700,000"],
+                            ["John Darcey", "750", "150,000", "400,000", "700,000"],
+                            ["John Darcey", "1,500,000", "280,000", "700,000", "900,000"],
+                            ["John Darcey", "850,000", "270,000", "300,000", "700,000"],
+                            ["John Darcey", "980,000", "150,000", "400,000", "700,000"],
+                            ["John Darcey", "870,000", "280,000", "700,000", "900,000"],
+                        ],
+                        type: "normal",
+                        title: "General Overview of Members and their Shares"
                     }}
                 />
 
