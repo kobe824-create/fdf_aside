@@ -1,9 +1,9 @@
-export default function FinancialCard(props: { label: string, amount: number, onclick: () => void, style?: React.CSSProperties }) {
-    const { label, amount, onclick, style } = props;
+export default function FinancialCard(props: { label: string, amount: number, onclick?: () => void, style?: React.CSSProperties, className?: string }) {
+    const { label, amount, onclick, style, className } = props;
 
 
     return (
-        <div className="financial-card"
+        <div className={`financial-card ${className}`} 
             style={style}
             onClick={onclick}
         >

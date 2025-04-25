@@ -55,6 +55,7 @@ select:focus {
   outline: none;
 }
 
+
 /* Universal settings*/
 .login-page-wrapper,
 .logo-container,
@@ -371,6 +372,9 @@ input {
 .financial-card:hover {
   background-color: rgba(91, 195, 255, 0.467);
 }
+.financial-card.unhoverable:hover {
+  background-color: #f5f5f5;
+}
 .financial-card p {
   font-family: "Outfit", sans-serif;
   font-weight: 300;
@@ -501,6 +505,13 @@ input {
   font-size: 14px;
   line-height: 20px;
   color: #727a90;
+}
+
+.members-list-div {
+  width: 100%;
+}
+.members-list-div.two{
+  display: none;
 }
 .pagination {
   gap: 8px;
@@ -1891,6 +1902,10 @@ input {
 
 /* responsiveness */
 /* Large screens (Desktops & Laptops) */
+
+.phone {
+  display: none;
+}
 @media (max-width: 1200px) {
   /* Styles for desktops and large screens */
 
@@ -2116,6 +2131,18 @@ input {
     display: grid;
     grid-template-columns: repeat(2, 1fr); /* 2 columns of equal width */
     /* grid-template-rows: 1fr 1fr;       3 rows: first and third = 1fr, second = 2fr */
+  }
+  .members-list-div.two{
+    display: block;
+  }
+  .members-list-div.one{
+    display: none;
+  }
+  .phone {
+    display: block;
+  }
+  .desk {
+    display: none;
   }
   
 }
