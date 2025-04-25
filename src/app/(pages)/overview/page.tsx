@@ -302,7 +302,7 @@ export default function Page() {
 
                         ],
                         type: "colored",
-                        title: "Last 6 Months Contribution Overview",
+                        title: "Last 12 Months Contribution Overview",
                         searchWords: [
                             "Names"
                         ]
