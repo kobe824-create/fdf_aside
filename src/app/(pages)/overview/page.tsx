@@ -290,7 +290,6 @@ export default function Page() {
                     </div>
                 </div>
 
-
                 <Table
                     data={{
                         tableHeaders: ["Name", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
@@ -316,6 +315,36 @@ export default function Page() {
                         ],
                         type: "colored",
                         title: "Contribution Overview",
+                        searchWords: [
+                            "Names"
+                        ]
+                    }}
+                />
+                  <Table
+                    data={{
+                        tableHeaders: ["Name", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                        tableData: [
+                            [users[0].lastname, "red", "green", "red", "red", "red", "green", "red", "green", "red", "red", "red", "green"],
+                            [users[1].lastname, "red", "green", "red", "red", "red", "red", "red", "green", "red", "red", "red", "green"],
+                            [users[2].lastname, "red", "green", "red", "red", "red", "red", "red", "green", "red", "red", "red", "green"],
+                            [users[3].lastname, "red", "green", "red", "red", "red", "green", "red", "green", "red", "red", "red", "green"],
+                            [users[4].lastname.split(" ")[0], "red", "green", "red", "red", "red", "green", "red", "green", "red", "red", "red", "green"],
+                            [users[5].lastname, "red", "green", "red", "green", "red", "red", "red", "green", "red", "red", "red", "green"],
+                            [users[6].lastname, "red", "green", "red", "red", "red", "green", "red", "green", "red", "red", "red", "green"],
+                            [users[7].lastname, "red", "green", "red", "red", "red", "green", "red", "green", "red", "red", "red", "green"],
+                            [users[8].lastname, "red", "green", "red", "red", "red", "green", "red", "green", "red", "red", "red", "green"],
+                            [users[9].lastname, "red", "green", "red", "red", "red", "green", "red", "green", "red", "red", "red", "green"],
+                            [users[10].lastname, "red", "green", "red", "red", "red", "green", "red", "green", "red", "red", "red", "green"],
+                            [users[11].lastname, "red", "green", "red", "red", "red", "green", "red", "green", "red", "red", "red", "green"],
+                            [users[12].lastname, "red", "green", "red", "red", "red", "green", "red", "green", "red", "red", "red", "green"],
+                            [users[13].lastname, "red", "green", "red", "red", "red", "red", "red", "green", "red", "red", "red", "green"],
+                            [users[14].lastname, "red", "green", "red", "red", "red", "green", "red", "green", "red", "red", "red", "green"],
+                            [users[15].lastname, "red", "green", "red", "red", "red", "green", "red", "green", "red", "red", "red", "green"],
+                            [users[16].lastname, "red", "green", "red", "red", "red", "green", "red", "green", "red", "red", "red", "green"],
+
+                        ],
+                        type: "colored",
+                        title: "Attendance Overview",
                         searchWords: [
                             "Names"
                         ]

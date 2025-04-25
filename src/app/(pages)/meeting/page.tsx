@@ -180,6 +180,7 @@ export default function Meeting() {
                         <div className="meeting-side-bar-top">
                             <h3>
                                 Attachments
+                             {user?.role === "admin" && (
                                 <Button
                                     label="Add Attachment"
                                     className="button-primary"
@@ -193,8 +194,9 @@ export default function Meeting() {
                                             setUpdate={setUpdate}
                                         />
                                         )
-                                    }}
-                                />
+                                    }
+                                }
+                                />)}
                             </h3>
                             {/* <div className="attachment">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
