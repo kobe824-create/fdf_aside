@@ -42,7 +42,7 @@ export default function Page() {
                 <div className="overview-page-body-left-side">
                     <div className="financial-cards-wrapper">
                         <FinancialCard
-                            label="Shares"
+                            label="Company Wealth"
                             amount={8000000}
                             onclick={() => {
                                 console.log("Total Revenue");
