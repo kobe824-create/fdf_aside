@@ -43,28 +43,28 @@ export default function Page() {
                     <div className="financial-cards-wrapper">
                         <FinancialCard
                             label="Shares"
-                            amount={12000000}
+                            amount={8000000}
                             onclick={() => {
                                 console.log("Total Revenue");
                             }}
                         />
                         <FinancialCard
                             label="Land Investment"
-                            amount={2000000}
+                            amount={9000000}
                             onclick={() => {
                                 console.log("Total Revenue");
                             }}
                         />
                         <FinancialCard
                             label="Investment2"
-                            amount={1500000}
+                            amount={7500000}
                             onclick={() => {
                                 console.log("Total Revenue");
                             }}
                         />
                         <FinancialCard
                             label="Investment3"
-                            amount={12500000}
+                            amount={9500000}
                             onclick={() => {
                                 console.log("Total Revenue");
                             }}
