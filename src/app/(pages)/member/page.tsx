@@ -268,44 +268,47 @@ export default function Member() {
                 </div>
             </div>
             <div className="financial-cards-wrapper">
-
-                <FinancialCard
-
-                    label="Total Contributions"
-                    amount={totalContributions}
-                    onclick={() => {
-                        setPopup("contributionstable")
-                        setPopupDisplay(true);
-
-                    }}
-
-                />
-                <FinancialCard
-                    label="Pending Contributions"
-                    amount={totalPendingContributions}
-                    onclick={() => {
-                        setPopup("pending")
-                        setPopupDisplay(true);
-                    }}
-
-                />
-                <FinancialCard
-                    label="Penalties"
-                    amount={totalPenalties}
-                    onclick={() => {
-                        setPopup("penalties")
-                        setPopupDisplay(true);
-                    }}
-                />
                 <FinancialCard
                     label="Share"
                     amount={share}
+                    style={{ gridColumn: "1 / span 2", gridRow: "1" }}
                     onclick={() => {
-                        setPopup("sharepopup")
+                        setPopup("sharepopup");
+                        setPopupDisplay(true);
+                    }}
+                />
+
+                <FinancialCard
+                    label="Pending Contributions"
+                    amount={totalPendingContributions}
+                    style={{ gridColumn: "1", gridRow: "2" }}
+                    onclick={() => {
+                        setPopup("pending");
+                        setPopupDisplay(true);
+                    }}
+                />
+
+                <FinancialCard
+                    label="Penalties"
+                    amount={totalPenalties}
+                    style={{ gridColumn: "2", gridRow: "2" }}
+                    onclick={() => {
+                        setPopup("penalties");
+                        setPopupDisplay(true);
+                    }}
+                />
+
+                <FinancialCard
+                    label="Total Contributions"
+                    amount={totalContributions}
+                    style={{ gridColumn: "1 / span 2", gridRow: "3" }}
+                    onclick={() => {
+                        setPopup("contributionstable");
                         setPopupDisplay(true);
                     }}
                 />
             </div>
+
             <div className="my-account-bottom-container">
                 <div className="investment-allocation-cont">
                     <h3>
@@ -326,17 +329,17 @@ export default function Member() {
                                 <td>10000</td>
                             </tr>
                             <tr>
-                                <td>General Investment</td>
+                                <td>Land Investment</td>
                                 <td>100000</td>
                                 <td>10000</td>
                             </tr>
                             <tr>
-                                <td>General Investment</td>
+                                <td>Investment2</td>
                                 <td>100000</td>
                                 <td>10000</td>
                             </tr>
                             <tr>
-                                <td>General Investment</td>
+                                <td>Investment3</td>
                                 <td>100000</td>
                                 <td>10000</td>
                             </tr>
@@ -373,6 +376,7 @@ export default function Member() {
                     </div>
 
                 </div>
+            
             </div>
         </div>
     );
