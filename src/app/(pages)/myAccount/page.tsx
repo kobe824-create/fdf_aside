@@ -322,7 +322,7 @@ export default function MyAccount() {
                         </tbody>
                     </table>
                 </div>
-                <div className="middle-cont">
+                {/* <div className="middle-cont">
                     <h3>Latest Meeting Reports</h3>
                     <div className="meeting-reports">
                         {
@@ -351,7 +351,7 @@ export default function MyAccount() {
                         }
                     </div>
 
-                </div>
+                </div> */}
                 <Button
                     label="Logout"
                     onClick={() => {
