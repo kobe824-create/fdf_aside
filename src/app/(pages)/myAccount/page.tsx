@@ -315,9 +315,9 @@ export default function MyAccount() {
                                 <td>20%</td>
                             </tr>
                             <tr>
-                                <td>Investment3</td>
-                                <td>750000</td>
-                                <td>5%</td>
+                                <td>Monthly Contributions</td>
+                                <td>0</td>
+                                <td>0%</td>
                             </tr>
                         </tbody>
                     </table>
