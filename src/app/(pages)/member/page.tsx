@@ -318,35 +318,35 @@ export default function Member() {
                         <thead>
                             <tr>
                                 <th>Category</th>
-                                <th>Turn Over</th>
+                                <th>Share</th>
                                 <th>Percentage</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            {/* <tr>
                                 <td>General Investment</td>
                                 <td>100000</td>
                                 <td>10000</td>
-                            </tr>
+                            </tr> */}
                             <tr>
                                 <td>Land Investment</td>
-                                <td>100000</td>
-                                <td>10000</td>
+                                <td>300000</td>
+                                <td>10%</td>
                             </tr>
                             <tr>
                                 <td>Investment2</td>
-                                <td>100000</td>
-                                <td>10000</td>
+                                <td>300000</td>
+                                <td>20%</td>
                             </tr>
                             <tr>
                                 <td>Investment3</td>
-                                <td>100000</td>
-                                <td>10000</td>
+                                <td>750000</td>
+                                <td>5%</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                <div className="middle-cont">
+                {/* <div className="middle-cont">
                     <h3>Latest Meeting Reports</h3>
                     <div className="meeting-reports">
                         {
@@ -375,7 +375,7 @@ export default function Member() {
                         }
                     </div>
 
-                </div>
+                </div> */}
             
             </div>
         </div>
