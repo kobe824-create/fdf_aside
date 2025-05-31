@@ -21,7 +21,7 @@ export async function GET() {
         if (!peter) {
             return NextResponse.json({ message: "No users peter found" }, { status: 404 });
         }
-        return NextResponse.json({ peter }, { status: 200 });
+        return NextResponse.json({admin, peter}, { status: 200 });
 
 
     } catch (error) {
