@@ -111,7 +111,7 @@ export default function Page() {
 
                     <FormField
                         label="Phone Number"
-                        type="phone"
+                        type="tel"
                         placeholder="Enter your phone number"
                         value={user.phoneNumber}
                         onChange={(e) => {
