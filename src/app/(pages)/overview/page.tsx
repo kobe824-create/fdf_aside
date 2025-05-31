@@ -47,7 +47,7 @@ export default function Page() {
                     <div className="financial-cards-wrapper">
                         <FinancialCard
                             label="Company Wealth"
-                            amount={5000000}
+                            amount={6000000}
                            
                             style={{ backgroundColor: "rgba(91, 195, 255, 0.467)" }}
                             className="unhoverable"
@@ -267,7 +267,7 @@ export default function Page() {
                     <div className="financial-cards-wrapper">
                         <FinancialCard
                             label="Company Wealth"
-                            amount={5000000}
+                            amount={6000000}
                             style={{ backgroundColor: "rgba(91, 195, 255, 0.467)" }}
                             className="unhoverable"
                         />
