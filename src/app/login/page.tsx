@@ -24,15 +24,15 @@ export default function Page() {
 
     const loggedInUser = useAuth().user
 
-    useEffect(() => {
-        axios.get("/api/users/populateUsers")
-            .then((res) => {
-                console.log("Users populated successfully", res.data);
-            })
-            .catch((err) => {
-                console.error("Error populating users:", err);
-            })     
-    }, [])
+    // useEffect(() => {
+    //     axios.get("/api/users/populateUsers")
+    //         .then((res) => {
+    //             console.log("Users populated successfully", res.data);
+    //         })
+    //         .catch((err) => {
+    //             console.error("Error populating users:", err);
+    //         })     
+    // }, [])
 
     useEffect(() => {
         if (loggedInUser) {
