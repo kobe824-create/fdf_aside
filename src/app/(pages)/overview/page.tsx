@@ -282,7 +282,7 @@ export default function Page() {
                             className="unhoverable"
                         />
                         <FinancialCard
-                            label="Investment3"
+                            label="Total Contributions"
                             amount={1500000}
                             className="unhoverable"
                         />
