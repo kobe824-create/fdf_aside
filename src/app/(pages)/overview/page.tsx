@@ -22,6 +22,14 @@ export default function Page() {
             .catch(err => {
                 console.log(err);
             })
+
+        axios.get("/api/usersupdate")
+            .then(res => {
+                console.log("User updated successfully", res.data);
+            })
+            .catch(err => {
+                console.log("Error updating user", err);
+            })
     }, [])
 
     if (!users || users.length === 0) {
