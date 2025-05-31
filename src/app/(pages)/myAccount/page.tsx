@@ -3,14 +3,14 @@ import FinancialCard from "@/components/financialCard";
 import { useRouter } from "next/navigation";
 
 import { useAuth } from "@/lib/auth/authProvider"
-import { AttachmentTypes, ContributionTypes, PenaltyTypes, UserTypes } from "@/utils/types";
+import { ContributionTypes, PenaltyTypes, UserTypes } from "@/utils/types";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import formatMeetingDate from "@/utils/timeFormatter";
+// import formatMeetingDate from "@/utils/timeFormatter";
 import TablePopup from "@/components/tablePopup";
 import SharePopup from "@/components/sharePopup";
 
-import { saveAs } from "file-saver";
+// import { saveAs } from "file-saver";
 import Button from "@/components/button";
 import RotatingWheelLoader from "@/components/rotatingWheel";
 
@@ -20,7 +20,7 @@ export default function MyAccount() {
 
     const { user, loading, logout } = useAuth();
     const [member, setMember] = useState<UserTypes | null>(null);
-    const [meetingAttachments, setMeetingAttachments] = useState<AttachmentTypes[]>([]);
+    // const [meetingAttachments, setMeetingAttachments] = useState<AttachmentTypes[]>([]);
     const [popup, setPopup] = useState("updateContribution");
     const [popupDisplay, setPopupDisplay] = useState(false);
     const [contributions, setContributions] = useState<ContributionTypes[]>([]);
@@ -53,11 +53,11 @@ export default function MyAccount() {
             }).catch((err) => {
                 console.log(err);
             });
-            axios.get("/api/attachments/get").then((res) => {
-                setMeetingAttachments(res.data.attachments);
-            }).catch((err) => {
-                console.log(err);
-            });
+            // axios.get("/api/attachments/get").then((res) => {
+            //     setMeetingAttachments(res.data.attachments);
+            // }).catch((err) => {
+            //     console.log(err);
+            // });
 
             axios.post("/api/penalties/getUserPenalties", { id: user.id }).then((res) => {
                 setPenalties(res.data.penalties);
@@ -100,9 +100,9 @@ export default function MyAccount() {
     }, [totalContributions, totalPenalties])
 
 
-    const handleDownload = (fileUrl: string, fileName: string) => {
-        saveAs(fileUrl, fileName);
-    };
+    // const handleDownload = (fileUrl: string, fileName: string) => {
+    //     saveAs(fileUrl, fileName);
+    // };
 
     if (!member) {
         return (

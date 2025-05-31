@@ -8,9 +8,9 @@ import { AttachmentTypes, ContributionTypes, PenaltyTypes, UserTypes } from "@/u
 import UpdateContributionPopup from "@/components/updateContributionPopup";
 import TablePopup from "@/components/tablePopup";
 import SharePopup from "@/components/sharePopup";
-import formatMeetingDate from "@/utils/timeFormatter";
+// import formatMeetingDate from "@/utils/timeFormatter";
 import { useAuth } from "@/lib/auth/authProvider";
-import { saveAs } from "file-saver";
+// import { saveAs } from "file-saver";
 import RotatingWheelLoader from "@/components/rotatingWheel";
 
 export default function Member() {
@@ -91,9 +91,9 @@ export default function Member() {
     const { user } = useAuth();
 
 
-    const handleDownload = (fileUrl: string, fileName: string) => {
-        saveAs(fileUrl, fileName);
-    };
+    // const handleDownload = (fileUrl: string, fileName: string) => {
+    //     saveAs(fileUrl, fileName);
+    // };
 
     if (!member || !meetingAttachments) {
         return (
