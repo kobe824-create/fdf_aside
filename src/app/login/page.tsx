@@ -8,8 +8,8 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import 'react-phone-number-input/style.css'
-import PhoneInput from 'react-phone-number-input'
-import { cn } from "@/lib/utils";
+// import PhoneInput from 'react-phone-number-input'
+// import { cn } from "@/lib/utils";
 
 
 import { useAuth } from "@/lib/auth/authProvider";
@@ -97,7 +97,7 @@ export default function Page() {
                     <h1>Please Sign In</h1>
                 </div>
                 <fieldset>
-                    <PhoneInput
+                    {/* <PhoneInput
                         placeholder="Enter phone number"
                         value={user.phoneNumber}
                         onChange={(value) => {
@@ -107,8 +107,17 @@ export default function Page() {
                         className={cn(
                             "flex h-10 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
                         )}
-                    />
+                    /> */}
 
+                    <FormField
+                        label="Phone Number"
+                        type="phone"
+                        placeholder="Enter your phone number"
+                        value={user.phoneNumber}
+                        onChange={(e) => {
+                            setUser({...user, phoneNumber: e.target.value})
+                        }}
+                    />
                     <p className='text-black-500 text-sm w-100 text-start'>
                         Please Enter your phone number
                     </p>
