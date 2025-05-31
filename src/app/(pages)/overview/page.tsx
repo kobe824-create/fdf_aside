@@ -352,7 +352,7 @@ export default function Page() {
                 />
                 <Table
                     data={{
-                        tableHeaders: ["Name", "Share", "Land investment", "investment2", "investment3"],
+                        tableHeaders: ["Name", "Share", "Land investment", "Investment2", "Total contributions"],
                         tableData: [
                             [users[0].lastname, "1,200,000", "500,000", "350,000", "400,000"],
                             [users[1].lastname, "900,000", "425,000", "370,000", "650,000"],
